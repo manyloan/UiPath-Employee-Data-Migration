@@ -1,6 +1,14 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1842,2871" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_EmployeeListExe="C:\UiPath\TesteAPIBI\EmployeeList.exe" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_EmployeeListExe" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1966,2408</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="38">
+    <scg:List x:TypeArguments="x:String" Capacity="43">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -39,6 +47,11 @@
       <x:String>UiPath.Web</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
       <x:String>UiPath.Web.Activities</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -74,10 +87,10 @@
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.Web</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap:VirtualizedContainerService.HintSize="554,2806" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="554,2343" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EmployeeId" />
       <Variable x:TypeArguments="x:Int32" Name="counter" />
@@ -91,472 +104,389 @@
       <Variable x:TypeArguments="x:String" Name="ZipCode" />
       <Variable x:TypeArguments="x:String" Name="City" />
       <Variable x:TypeArguments="x:String" Name="result" />
+      <Variable x:TypeArguments="x:String" Name="PhoneNumber" />
+      <Variable x:TypeArguments="x:String" Name="StartDate" />
+      <Variable x:TypeArguments="x:String" Name="ChallengeUrl">
+        <Variable.Default>
+          <Literal x:TypeArguments="x:String">https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html</Literal>
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="x:String" Name="InsertJsTxt" />
+      <Variable x:TypeArguments="x:String" Name="UpdateInsertJsTxt" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" Private="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="512,51" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Url="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html">
-      <ui:OpenBrowser.Body>
-        <ActivityAction x:TypeArguments="x:Object">
-          <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-          </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="200,83" sap2010:WorkflowViewState.IdRef="Sequence_2">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </Sequence>
-        </ActivityAction>
-      </ui:OpenBrowser.Body>
+    <Sequence DisplayName="Declare variables" sap:VirtualizedContainerService.HintSize="512,540" sap2010:WorkflowViewState.IdRef="Sequence_6">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ui:OpenBrowser>
-    <Assign sap:VirtualizedContainerService.HintSize="512,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:Int32">1</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:InterruptibleWhile Condition="[counter &lt;= 10]" DisplayName="While" sap:VirtualizedContainerService.HintSize="512,2523" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_1">
+      <Assign sap2010:Annotation.AnnotationText="Insert here the full path to the Employee.exe" sap:VirtualizedContainerService.HintSize="384,102" sap2010:WorkflowViewState.IdRef="Assign_5">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:String">[in_EmployeeListExe]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:String">C:\UiPath\TesteAPIBI\EmployeeList.exe</InArgument>
+        </Assign.Value>
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Assign>
+      <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+        <Assign.To>
+          <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
+        </Assign.To>
+        <Assign.Value>
+          <InArgument x:TypeArguments="x:Int32">1</InArgument>
+        </Assign.Value>
+      </Assign>
+      <ui:ReadTextFile Content="[UpdateInsertJsTxt]" DisplayName="Read Text File" FileName="InsertJS.js" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_3" />
+      <ui:StartProcess Arguments="{x:Null}" WorkingDirectory="{x:Null}" DisplayName="Start Process" FileName="[in_EmployeeListExe]" sap:VirtualizedContainerService.HintSize="384,87" sap2010:WorkflowViewState.IdRef="StartProcess_1" />
+    </Sequence>
+    <ui:InterruptibleWhile DisplayName="While" sap:VirtualizedContainerService.HintSize="512,1671" sap2010:WorkflowViewState.IdRef="InterruptibleWhile_2">
       <ui:InterruptibleWhile.Body>
-        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="476,2358" sap2010:WorkflowViewState.IdRef="Sequence_5">
-          <Sequence.Variables>
-            <Variable x:TypeArguments="x:String" Name="PhoneNumber" />
-            <Variable x:TypeArguments="x:String" Name="StartDate" />
-          </Sequence.Variables>
+        <Sequence sap:VirtualizedContainerService.HintSize="476,1506" sap2010:WorkflowViewState.IdRef="Sequence_12">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Employee ID" sap:VirtualizedContainerService.HintSize="434,106" sap2010:WorkflowViewState.IdRef="GetValue_1">
-            <ui:GetValue.Target>
-              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="76dc48c2-7da8-4ebc-a9b6-db219edde075" InformativeScreenshot="a1c5ac30696ca571461540885c5f2e3b" Selector="&lt;html app='chrome.exe' title='*Employee Data Migration' /&gt;&lt;webctrl tag='INPUT' id='employeeID' /&gt;">
-                <ui:Target.TimeoutMS>
-                  <InArgument x:TypeArguments="x:Int32" />
-                </ui:Target.TimeoutMS>
-                <ui:Target.WaitForReady>
-                  <InArgument x:TypeArguments="ui:WaitForReady" />
-                </ui:Target.WaitForReady>
-              </ui:Target>
-            </ui:GetValue.Target>
-            <ui:GetValue.Value>
-              <OutArgument x:TypeArguments="x:String">[EmployeeId]</OutArgument>
-            </ui:GetValue.Value>
-          </ui:GetValue>
-          <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[&quot;https://botgames-employee-data-migration-vwsrh7tyda-uc.a.run.app/employees?id=&quot;+EmployeeId]" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Password="[Nothing]" Result="[result]" TimeoutMS="6000" Username="[Nothing]">
-            <ui:HttpClient.Attachments>
-              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-            </ui:HttpClient.Attachments>
-            <ui:HttpClient.Cookies>
-              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-            </ui:HttpClient.Cookies>
-            <ui:HttpClient.Headers>
-              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-            </ui:HttpClient.Headers>
-            <ui:HttpClient.Parameters>
-              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-            </ui:HttpClient.Parameters>
-            <ui:HttpClient.UrlSegments>
-              <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
-            </ui:HttpClient.UrlSegments>
-          </ui:HttpClient>
-          <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+          <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_10">
             <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[PhoneNumber]</OutArgument>
+              <OutArgument x:TypeArguments="x:String">[InsertJsTxt]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[Split(result,"""")(3)]</InArgument>
+              <InArgument x:TypeArguments="x:String">[UpdateInsertJsTxt]</InArgument>
             </Assign.Value>
           </Assign>
-          <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_4">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[StartDate]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[Split(result,"""")(7)]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Application: Employee Database" sap:VirtualizedContainerService.HintSize="434,51" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" ScopeGuid="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
+          <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: Automation Anywhere Labs - Employee Data Migration" sap:VirtualizedContainerService.HintSize="434,1314" sap2010:WorkflowViewState.IdRef="NApplicationCard_3" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="56cc2026-cbe6-4710-a5f9-fc6886e21232" Version="V1">
             <uix:NApplicationCard.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
                 </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,2270" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,1098" sap2010:WorkflowViewState.IdRef="Sequence_7">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Enter the Emp number'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Text="[EmployeeId]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="218, 111, 130, 23" ElementType="InputBox" FriendlyName="'1003'" FullSelectorArgument="&lt;wnd ctrlname='txtEmpId' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtEmpId' /&gt;" Guid="0007d438-785c-486e-877b-9ee9f6e2938b" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIYAAAAbCAYAAAC5gfcMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFgSURBVGhD7ZpNioQwEEY9Vw6Um7jPxqt4mejGn5UbBRfipsak1enEUtrpAQP5HnygqZBNPaNCkr7vCUH8QAyEzS5G13XUNA1VVYVEmLIsqW3boxh1XdM0TTTPMxJhhmGgoiiOYhhrzAQQJ+M4ktYaYgAXiAFYIAZguS1GLhNKEkn5ev8iJ5mY8VekUzyruePHNcGT3BBDkxJcE9cGC7XM2OZs9euaUtpekVYk9nkgBD4Ww+4UUnnNXcillUWsTdZK2Hu7M1zVHN4FAiFw81XiP/VMs99kuKo5nI2Dx3hUjK3uzAFBEMaOgW+M4PhajLNdwMpwVXPY1hXkOwOe4Xsxlqs//ZXky4fsLgE+PkPjH8RY2F4FNt5Tf1Zbd5PfeGuCR7kpBogFiAFYIAZggRiABWIAFogBWE7FMGc+zZk/IwcSX0zv2TOf5pR4lmWUpikSYUzvjQMHMRDkPRADYdLTD4G+q7x3S94SAAAAAElFTkSuQmCC" InformativeScreenshot="c6fc697a81389da22530809ee38ab7bc.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                  <uix:NGetText DisplayName="Get Text 'Employee ID'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_10" ScopeIdentifier="56cc2026-cbe6-4710-a5f9-fc6886e21232" Version="V1">
+                    <uix:NGetText.Target>
+                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 353, 270, 38" ElementType="InputBox" FriendlyName="'1014'" FullSelectorArgument="&lt;webctrl tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='INPUT' type='text' aaname='' /&gt;" Guid="71a4ae0e-9c94-4013-b509-62459105a2c2" InformativeScreenshot="a80c218ceb495e1ac35838a7bd43e601.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector">
                         <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="50, 114, 133, 15" ElementType="Text" FriendlyName="'Enter the Emp number'" FullSelectorArgument="&lt;wnd ctrlname='label3' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='label3' check:text='Enter the Emp number' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIkAAAATCAYAAACk2S7sAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHoSURBVGhD7ZbRkcMgDESpinrohmLoxbW4Ay42rE8IJBPHyeRu9PEmE4NXK7FO7NZ1zYahYSExTrGQGKdYSIxTLCTGKeOQLDF757Ij+Lj0+z4NfIU0Xp/hW3u7Sgpv70EPiY95Ga1LVMMhDdauwPXuDMmzvX0rfy0kKZQn866QdHoWkp6vC0k15Lwv62QPDvQABwktAE1+3YWcUEfSO3z19dVaFKm3kbbzOQT/q4eecDAhjH0AZV78cJdY6uwPxJ1epJnw62z+lOl3kt380XQp1DT2+N7/kqQctv08MPTAH83HBftbxF+SYX2lVtVrrhP2+wXtcv+So9/2Vq/CHLqnWZvXVEhe9fLa/MG1X5JalA+nO1Ts51CTvAZBDAmapoPWahFNsS7THvfWHgzWOl9AmxfTwFoTkle9aDOR5jDgrSHh6w0TJp8JiVqLItVl2pcPBnob2ryYBtbuDIk6E2kOA24NSdPoth869P8uxdLchElRD4dBB6TVwvcNqS7TnjkYaHQ+gTYvttY8EHd50WYizWHA9DvJblhrer+3/geSPb1WbW7KJNPDPdCufo76Ui2qKfXGtKcOhgJPFHVeeLco+MdL6vZ5OSQU6kWaCa5fDomhw8P5z7GQXMFCYpxiITGMFguJccKafwBwPEAtA8/FVgAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                          <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                            <uix:Target DesignTimeRectangle="740, 321, 92, 24" ElementType="Text" FriendlyName="'Employee ID'" FullSelectorArgument="&lt;webctrl tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='LABEL' type='' aaname='Employee ID' check:text='Employee ID' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGAAAAAcCAYAAACeeLqCAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJ8SURBVGhD7ZjBSgMxEEBz9uStFUQoihcP3vsrgiIUKRU82P/wUkX8jvXkX0i/wUPBfxgnyXY7M5m02Wobq3lQymZnJ5N52d1SA4WsFAGZKQIyUwRkpgjITBGQmSIgMwsBswrG/T70o58JTOvQjfE+2c48P8Dn6xj69xV81sfL+jd+baICmIChMTB5r49zsOMC9P5NYWJFPOqrKgLWJF0AgucGkXNrCZg+eqPuu7nVfOPYGLE+L3hqv8U1DYoAd10Tz29nNxdtgsPvuCCuyTGGalafIKTEUFoJQPRavyHgAGObReK1o6NTVzwds/nmx7bg7qFhRfhFk4YLAfa8MdeLZmDOazovxhtzw5slxrQ5jFhnSoykrQC/kfjmsjABtyfncIxJFjuBfMhuDgrGMqp7HGOG67H6OlvAnhmKnSV2KxWA9Wi3LV9IZLfP64jkaB2j0FYAWxth/UeQKM6NsRdNKEBbELuOFul2oRSGYJ0jUievhQuJ7To6T0qMxr8QoDZA1onHAzPwovAa+vixc3bPjjAPzhF8fO6UGI22Alz87xPAY6SA2B0wZM99n+PiDeDjgb9jYoumpMRotBUQ9sezVQGxd0AzJxWA9ax+B3jsmLl9guc78oK2RCSy5qXEKATnl/UvshbLVgV0T5RfQTQPFYDY8/JX0BXWyJpswfFRpwe9zihopJuDCsPYS7HOlBhJugC/ybTdb2EClv8VsdipQeMQN7ZCgNl/gcoWPs8pckgBFrdQpQZOPZfMV+MbvDxHSgxFE/C9vyI2jG8kb+7PEf4c3RX+hgDlztkVdltAc9uv/uvgt7I1AQWdIiAzRUBmioDMFAGZKQKyAvAFYAQh6aoP0I0AAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
                           </scg:List>
                         </uix:TargetAnchorable.Anchors>
                       </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                  </uix:NTypeInto>
-                  <uix:NClick ClickType="Single" DisplayName="Click 'Search'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
+                    </uix:NGetText.Target>
+                    <uix:NGetText.Text>
+                      <OutArgument x:TypeArguments="x:String">[EmployeeId]</OutArgument>
+                    </uix:NGetText.Text>
+                  </uix:NGetText>
+                  <ui:HttpClient Body="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" StatusCode="{x:Null}" AcceptFormat="ANY" AuthenticationType="None" BodyFormat="application/xml" ClientCertificate="[Nothing]" ClientCertificatePassword="[Nothing]" DisplayName="HTTP Request" EnableSSLVerification="True" EndPoint="[&quot;https://botgames-employee-data-migration-vwsrh7tyda-uc.a.run.app/employees?id=&quot;+EmployeeId]" sap:VirtualizedContainerService.HintSize="334,57" sap2010:WorkflowViewState.IdRef="HttpClient_2" Method="GET" Password="[Nothing]" ResourcePath="Return.json" Result="[result]" TimeoutMS="6000" Username="[Nothing]">
+                    <ui:HttpClient.Attachments>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                    </ui:HttpClient.Attachments>
+                    <ui:HttpClient.Cookies>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                    </ui:HttpClient.Cookies>
+                    <ui:HttpClient.Headers>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                    </ui:HttpClient.Headers>
+                    <ui:HttpClient.Parameters>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                    </ui:HttpClient.Parameters>
+                    <ui:HttpClient.UrlSegments>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+                    </ui:HttpClient.UrlSegments>
+                  </ui:HttpClient>
+                  <Sequence DisplayName="Extract Json Information" sap:VirtualizedContainerService.HintSize="334,66" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="JsonTxt" />
+                      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="JsonDict" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:ReadTextFile Content="[JsonTxt]" DisplayName="Read Text File" FileName="Return.json" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+                    <ui:DeserializeJson x:TypeArguments="scg:Dictionary(x:String, x:Object)" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="384,59" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[JsonDict]" JsonString="[JsonTxt]" />
+                    <Assign sap:VirtualizedContainerService.HintSize="384,61" sap2010:WorkflowViewState.IdRef="Assign_6">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[PhoneNumber]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[JsonDict("phoneNumber").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign sap:VirtualizedContainerService.HintSize="384,61" sap2010:WorkflowViewState.IdRef="Assign_7">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[StartDate]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[JsonDict("startDate").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                  <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Application: Employee Database" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NApplicationCard_4" OpenMode="IfNotOpen" ScopeGuid="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                    <uix:NApplicationCard.Body>
+                      <ActivityAction x:TypeArguments="x:Object">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type EmployeeId" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_13" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Text="[EmployeeId]" Version="V1">
+                            <uix:NTypeInto.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="218, 111, 130, 23" ElementType="InputBox" FriendlyName="'WindowsForms10.EDIT.app…'" FullSelectorArgument="&lt;wnd ctrlname='txtEmpId' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtEmpId' /&gt;" Guid="7d14b133-1c60-402c-95ef-db846f8bb270" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIYAAAAbCAYAAAC5gfcMAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACcSURBVGhD7dKxDcIwFEXRTMNqLMFwdEwBNBESkCjuUxi5QQi/DXyO9Cq7+3cqpVSz/wnD4r5hbNtW13Wty7LYgGu3vz/efRjtcd/3ypja7W/zK4fB2K7zUxj0hEEkDCJhEAmDSBhEwiASBpEwiIRBJAwiYRAJg0gYRMIgEgaRMIiEQRTDmI5nsz6Mw+kSP9o4aw10YZj9ThgWVuoHJKffX17fHqgAAAAASUVORK5CYII=" InformativeScreenshot="65af8c3d09165ca646aba8fb8e39cca7.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector, Image">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="50, 114, 133, 15" ElementType="Text" FriendlyName="'Enter the Emp number'" FullSelectorArgument="&lt;wnd ctrlname='label3' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='label3' check:text='Enter the Emp number' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIkAAAATCAYAAACk2S7sAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHoSURBVGhD7ZbRkcMgDESpinrohmLoxbW4Ay42rE8IJBPHyeRu9PEmE4NXK7FO7NZ1zYahYSExTrGQGKdYSIxTLCTGKeOQLDF757Ij+Lj0+z4NfIU0Xp/hW3u7Sgpv70EPiY95Ga1LVMMhDdauwPXuDMmzvX0rfy0kKZQn866QdHoWkp6vC0k15Lwv62QPDvQABwktAE1+3YWcUEfSO3z19dVaFKm3kbbzOQT/q4eecDAhjH0AZV78cJdY6uwPxJ1epJnw62z+lOl3kt380XQp1DT2+N7/kqQctv08MPTAH83HBftbxF+SYX2lVtVrrhP2+wXtcv+So9/2Vq/CHLqnWZvXVEhe9fLa/MG1X5JalA+nO1Ts51CTvAZBDAmapoPWahFNsS7THvfWHgzWOl9AmxfTwFoTkle9aDOR5jDgrSHh6w0TJp8JiVqLItVl2pcPBnob2ryYBtbuDIk6E2kOA24NSdPoth869P8uxdLchElRD4dBB6TVwvcNqS7TnjkYaHQ+gTYvttY8EHd50WYizWHA9DvJblhrer+3/geSPb1WbW7KJNPDPdCufo76Ui2qKfXGtKcOhgJPFHVeeLco+MdL6vZ5OSQU6kWaCa5fDomhw8P5z7GQXMFCYpxiITGMFguJccKafwBwPEAtA8/FVgAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NTypeInto.Target>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NTypeInto>
+                          <uix:NClick ClickType="Single" DisplayName="Click 'Search'" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NClick_3" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NClick.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="386, 111, 130, 27" ElementType="Button" FriendlyName="'Search'" FullSelectorArgument="&lt;wnd ctrlname='btnSearch' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='btnSearch' check:text='Search' /&gt;" Guid="70efdb17-3d87-495d-94b6-42f9bafb4c4d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIYAAAAfCAYAAAAiELUaAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHPSURBVHhe7ZpBbsIwEEVzLR/I5/FpvGm5ARsQK3IDEIscgGiaH8Vk7AxFrVqJOH/xhGQPDtJ/HgfJTdd1QkgJxSAmFIOYLMS4Xq9yPp/leDzK4XAgFYOMkTUyLz3IxEDB6XSS2+0m9/td+r4nFYOMkTUyL+XIxIA9KLQWIfWCzJG9diETA62FnWJ7IHNkr13IxMC5Y32R1A+y1y5QDDJCMYgJxSAm9YkRvTRNo/ASrbq/pg3i8Dwf7fmVUZcYRjjRU4zfUJUYbXBjl3ChNef/FYrxxqhjxJQjhZdwQdqfjKdjqRgfn5XGnJvn0jorpC4xBlLXyEIb56J4jKUdnYIsd/gkVxZ24yS00/xDgCL0Yjz9Dh9VzYqoTozELMgU6uKldKIUZSLvArMET4+rVJvW04LpupVQrRhA79qngQ5Er2SwOoYhxqITUIz3pQ1+bvl9K8Eh8KljPDqC+pcSwzCX12UCGWKYY3qcYrwfKdQZ9W4AHnIU8+qYccPL4/j5TAxjnayWYpCaoRjEhGIQE4pBTL4Vgze4tsnLG1y887lNXt755C3xbYGMkfXLW+LgcrnIfr+X3W4nH5+fpGKQMbJG5qUHCzEIARSDmFAMYtDJF3drhq7qo2oCAAAAAElFTkSuQmCC" InformativeScreenshot="904306a8ff6d0de4dc7894db50b22f8f.png" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                            </uix:NClick.Target>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NClick>
+                          <uix:NGetText DisplayName="Get Text 'First Name'" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NGetText_11" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="170, 179, 175, 19" ElementType="InputBox" FriendlyName="'Cathlene'" FullSelectorArgument="&lt;wnd ctrlname='txtFirstName' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtFirstName' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="b101694e-4ebf-42aa-962a-a894a46df223" InformativeScreenshot="12d10357bcc68f09c17fba0cfb9d7956.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="51, 177, 67, 15" ElementType="Text" FriendlyName="'First Name'" FullSelectorArgument="&lt;wnd ctrlname='lblFirstName' /&gt;&lt;ctrl name='First Name' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblFirstName' /&gt;&lt;ctrl name='First Name' role='text' automationid='' check:text='First Name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEcAAAATCAYAAADCrxD+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVFhH7ZTREcMgCECdinnYxmHcxVncgEYDEY16Nu31rnd8vGtrQeBF41JKZIwxOQtMzgKTs8DkLJjICYTOkdNgoBSwfAcfBzkPiZ6Aa2Co6wHva79mLQc8Rb3+VA7nDQdVcnS9/5PzkOWgWo6K+e+T0w3lHFLor+NxFWVIvdbUkn0ACSHH5H06OX0t6evKBfU/ECLUWF1vts+E7XdOaXIoB8jHM+8cqP4Wtk5ObpS/5/2nOaMeeMjoWUoREskX2dIPzySyJLd/WIrPT46KuZqTGF7flnPFHqeoz5E4pumBB5T6Urt5WNz7jV/J0TGFZuA9Ob2EnCP5pe6ohw05/X87fF9Ooc2XxrbkHOgTiKG9Hs2Qb8ip0s93WqkdPF+5MV+VI0/4RO56hvfL9Md4KLnGF6HqNMLx8i2f78rRtS50j3cmcoyMyVlgchaYnAUmZ0qiFzWzyyhzaOBBAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[FirstName]</OutArgument>
+                            </uix:NGetText.Text>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'Last Name'" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NGetText_12" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="170, 225, 175, 19" ElementType="InputBox" FriendlyName="'Wellbeloved'" FullSelectorArgument="&lt;wnd ctrlname='txtLastName' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtLastName' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="bbe9966b-01a2-4e29-9237-e5357ddae7bd" InformativeScreenshot="32aea9a4f9202e0826445818354eded9.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="51, 223, 65, 15" ElementType="Text" FriendlyName="'Last Name'" FullSelectorArgument="&lt;wnd ctrlname='lblLastName' /&gt;&lt;ctrl name='Last Name' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblLastName' /&gt;&lt;ctrl name='Last Name' role='text' automationid='' check:text='Last Name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEUAAAATCAYAAADGWsDDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFJSURBVFhH7ZThEcMgCIUzFfOwjcO4i7NkA6pGDBLMaa/tXVt/vLtGIA8+abZ932mp1YJiaEExtKAYWlAMdaB4wm2jDRwFM/4CBUeQPKLQn+cer2ef1nuheOwPKKBIn5+HcjughCJyvg+KGuSMl3wW+jqcPGs8+F2AhJBykHw8b6D0/GotiDgQIpy50q/bt63nN6X8NcCFMgiQC23O0KYkj/L7fJdRI/ya2hgLrsDIIAK5DJn7KbMwJK7VlyQ0D0VRT03Wpsoz5w5Dqblxa3SN4acHY3/2bi6pwLzoVVB4yGwuby7FpXkz6BgUPXyq6fpNQNGxEU1AadfSNmvrOGcIShTnHzU3fjObUmEf36zs7d0R42eleyhC2VBsA8SPHJ/zjR4qzej36HU1oMj8DLLjNwVFelXJHq/qQPlvLSiGFhRDC4qhBeWinR7peFRcSSG/WQAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[LastName]</OutArgument>
+                            </uix:NGetText.Text>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'Email Id'" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NGetText_13" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="170, 269, 175, 19" ElementType="InputBox" FriendlyName="'cwellbeloved4@dxyl.com'" FullSelectorArgument="&lt;wnd ctrlname='txtEmailId' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtEmailId' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="c2ece3ca-9adc-4786-866a-4e499dd91f53" InformativeScreenshot="f455c4f1c7d34fe4af72f617dc616e69.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="51, 270, 50, 15" ElementType="Text" FriendlyName="'Email Id'" FullSelectorArgument="&lt;wnd ctrlname='lblEmailId' /&gt;&lt;ctrl name='Email Id' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblEmailId' /&gt;&lt;ctrl name='Email Id' role='text' automationid='' check:text='Email Id' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADYAAAATCAYAAADbJP5YAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADVSURBVFhH7ZTRDcQgCECdinnYhmHcxVncgDttsWB7TWvT5DR+vMQIBZ6auhgjj8gU640p1hvHYoEYnGOnAAr7vBY8bvX02uQFJkh9kb3ZXwgE+Tv0+5hwLgbE4Sj+hGHFNH8jVvZBPVVgxKVRBr3NFaRW442JjKZdrC5SCZdmWUaGAaZQ1fslc1VszZND85hib9zY2kDEZLCloRKrDqhVrBZ57yleEJNhTmX6E7PP0uQ1iNk+EnsipkkyN25Mhs7x78+m5DWIbbUt98UGYIr1xhTri8gfREaJEvAfArkAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[EmailId]</OutArgument>
+                            </uix:NGetText.Text>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'City'" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NGetText_14" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="170, 312, 175, 19" ElementType="InputBox" FriendlyName="'Cleveland'" FullSelectorArgument="&lt;wnd ctrlname='txtCity' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtCity' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="411a679e-c9c2-4c11-a598-a540a45b9deb" InformativeScreenshot="bf961c3628d9764ed3f23e0b287bd07f.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="51, 315, 28, 15" ElementType="Text" FriendlyName="'City'" FullSelectorArgument="&lt;wnd ctrlname='lblCity' /&gt;&lt;ctrl name='City' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblCity' /&gt;&lt;ctrl name='City' role='text' automationid='' check:text='City' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAATCAYAAADxlA/3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADpSURBVEhL7ZTREYMgDIaZinmyTYZhF2Zhg7SpCVKIAa/1fPHhu7NC4+efYCil0J08Ao+AK5AxUgihEjFTSbBfG/85y6FAgu2hkPReIrQE5Pe+7xy2QEaK76IB0rjWMYqewxTQ6M2iTQL68AogYeTrSJh5fyLg+xEp93UEU2ArrEU6uhb0Caj8Z12S9ObFEZgnYO5t2rfJHLyIYM9AP2jO2iibpQ1AwGtO/IwtUIu0he1TYM1Le3y9+JkDAWaX+Co2pCODxuip0TZM4mccgV8Q+Un8zDUCC9Ov/F1Ah3LlI8Zc1IJ1bhYo9ALWdDDj0GMpxAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[City]</OutArgument>
+                            </uix:NGetText.Text>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'Zip Code'" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NGetText_15" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="170, 359, 175, 19" ElementType="InputBox" FriendlyName="'44101'" FullSelectorArgument="&lt;wnd ctrlname='txtZip' /&gt;&lt;ctrl name='Enter the Emp number' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtZip' /&gt;&lt;ctrl name='Enter the Emp number' role='editable text' automationid='' /&gt;" Guid="a9b0d59a-4415-42ae-937b-e1af32845f86" InformativeScreenshot="c01af14d4185578660b618a1ccb79cd6.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="51, 360, 55, 15" ElementType="Text" FriendlyName="'Zip Code'" FullSelectorArgument="&lt;wnd ctrlname='lblZipCode' /&gt;&lt;ctrl name='Zip Code' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblZipCode' /&gt;&lt;ctrl name='Zip Code' role='text' automationid='' check:text='Zip Code' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADsAAAATCAYAAAAu2nXoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE1SURBVFhH7ZTtDcQgCIadynncxmHcxVm6AXda4Sjix5lc0mv740kaaV94gWq2bYO78Ji9Ko/Zq6Kajd6CMabGeojB5WfrY/XdCKn7rQZ+74IeHzEx2Qje7sXlJItmg2Ma+SyAP5tZmkaaqhKfInqwScMFPT7Jj80GcKlIY8HHcsYni8/O7WYSSlOGRRYdhG8NNZtBOthEZDCQrllKxCeimMUk+L5c8X2FWcM4qFFyHBojYsdfoQwCa5vYnrZZ6pooUjFL5hoJ6/+1E2MaMqY2QrJiFhPJKa2Yrd5jrJptbVEP3Sx1zUFoxLhZucZUOCFu9HxWbmPRiLYhoUGbx2oMXv9VCorZj2hFMqWZ5TTXqNalqQgdOn+D0+VQw8gw0rgXCt0LaoiYytl5zE5zK7N/xo3MbvACDQXXsYk+wtkAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[ZipCode]</OutArgument>
+                            </uix:NGetText.Text>
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'Job Title'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_16" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="510, 173, 162, 19" ElementType="InputBox" FriendlyName="'Customer Success'" FullSelectorArgument="&lt;wnd ctrlname='txtJobTitle' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtJobTitle' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="8f4c3810-6723-4e2b-b55f-016bbfc3f692" InformativeScreenshot="80ee27811f4538e8d13a7d4776d6239f.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="385, 177, 54, 15" ElementType="Text" FriendlyName="'Job Title'" FullSelectorArgument="&lt;wnd ctrlname='lblJobTitle' /&gt;&lt;ctrl name='Job Title' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblJobTitle' /&gt;&lt;ctrl name='Job Title' role='text' automationid='' check:text='Job Title' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADoAAAATCAYAAADBGB7WAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEESURBVFhH7ZXtDQMhCECdynnYhmHcxVncgFYrnMXP5JK2sf54yXlY4InNmRAC/QNHdDeO6G4MRT1aMsYQuHZccJD2WfTteMITWpP2VVgkP8uxVKPPB0UvOO/bfp0jr6X2NqIKB69pf0c0F2P06VsAshyP17HIVTKbKEsK4GpRj1etyKBeZF2UJWPRXiwXm01sJhrX44k6gucz9yLSvG6wLFoVLpP3TrtT+LZofq64J2oJ/W+JNn8/YSDKnwMgF9eqkXLacsLq6kqTihXRKkcZ54Pk3lIc00Akn6IhWn7vXtOUGAtlpFH1PjG4Riui8j/kXDousozqVTG8ujtxRHfjiO5FoAe1LaUuttsDgAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[JobTitle]</OutArgument>
+                            </uix:NGetText.Text>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'Department'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_17" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="510, 220, 162, 19" ElementType="InputBox" FriendlyName="'Services'" FullSelectorArgument="&lt;wnd ctrlname='txtDepartment' /&gt;&lt;ctrl name='Zip Code' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtDepartment' /&gt;&lt;ctrl name='Zip Code' role='editable text' automationid='' /&gt;" Guid="daf280db-5f55-4ac5-9ef9-58712a74cc40" InformativeScreenshot="cee7644e141f231f0387859913371d5e.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="387, 223, 76, 15" ElementType="Text" FriendlyName="'Department'" FullSelectorArgument="&lt;wnd ctrlname='lblDepartment' /&gt;&lt;ctrl name='Department' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblDepartment' /&gt;&lt;ctrl name='Department' role='text' automationid='' check:text='Department' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFAAAAATCAYAAAAH3YpvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFuSURBVFhH7ZRdlgQRDIWtKuvJbizGXqzFDkwhQVQzqo1+mPZwT52KSK7Pj3LO+aP3dQAu6gBc1AG4qANwUR2AxqNSXjUCbV/kfrfGAEF7SzGrIYFE0+RulsHYF82LsZ2a7DsN0DnrNYSTCF7bOnevDKbT/2mAs30fACynMBe12kPIY3E+7R4glnEe681p4wo90iKywunnPIAqH65cuiGcF2pOeBR1aIzhZQ1u3VsA01tIOVycjYb/bC7Nl/NKvQw6xPNC5Qm/nYQMUNZOPtpb8twj99l/AtlAq8pcBlYbr/9JAmDTswuQarWbk/IJ4ITHcZ0/Bci7i95c/21DoQFANhbH6rwNAGc8fgygWHiI8UIIaIwZLXee5rM5NPKKCdMdgGUuxR4AnPLYqXPr29EYoBC/K5WywSaHzdUio/UYXA94/A4ACi+hxhOAYf5vHjt1bn1j7K4OwEWRuWLm/+oAXNQBuKg9AL9IB+CSnP8Bqir7jHHA/BwAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[Department]</OutArgument>
+                            </uix:NGetText.Text>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'Manager'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_18" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="510, 269, 162, 19" ElementType="InputBox" FriendlyName="'Bevan Mapson'" FullSelectorArgument="&lt;wnd ctrlname='txtManager' /&gt;&lt;ctrl name='City' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtManager' /&gt;&lt;ctrl name='City' role='editable text' automationid='' /&gt;" Guid="ae9c3450-d142-4031-9818-afdf4989e78a" InformativeScreenshot="7b20bbe7b2e1afee3e3d10e10f5b5900.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="387, 270, 56, 15" ElementType="Text" FriendlyName="'Manager'" FullSelectorArgument="&lt;wnd ctrlname='lblManager' /&gt;&lt;ctrl name='Manager' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblManager' /&gt;&lt;ctrl name='Manager' role='text' automationid='' check:text='Manager' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADwAAAATCAYAAADMBm6RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFRSURBVFhH7ZX/0cMgCIadinncxmHYxVmyAfUHEDRV2/vy3aVp/3ivFQ/kATRu2zb6Jv2A764f8N01AEbyzpHLgkDR7KFnuwMK0fp8htbADdjI/jmaAgNAgYMQqx19AQW4a4e9518s9hhSAdKIhzLWDBwDQek4S65AKU5epwL1eyMfOcPuJXmse0O/3u48IcfrtQBGvrM5QKSQO6u2Jx1myDIRClyTEhBNfuIjEyXvRfXZcyp+ApnXCryeuiWwJOFDDZoPPwB3FW6AOUEB1uvxxKcF7Iok8XpZYDMpI62B+X+9z3VULLAkeejQBHjkMwM+FMzqXGDzKWrWGZjHnOGbpIbAOPRpoSQ2F0AnwtxPTO9JnrKzgSV5qfwOvO+VRO2rPunw0Edjt3tybn8NNIe/A19DUiQFPkEXBuYpe6Fr7+hiwAwpOhk269Ij/R/6MuCNHhj+5tnGPHf3AAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[Manager]</OutArgument>
+                            </uix:NGetText.Text>
+                          </uix:NGetText>
+                          <uix:NGetText DisplayName="Get Text 'State'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_19" ScopeIdentifier="5057dd8a-5606-46cf-9fde-97c640765221" Version="V1">
+                            <uix:NGetText.Target>
+                              <uix:TargetAnchorable DesignTimeRectangle="510, 314, 162, 19" ElementType="InputBox" FriendlyName="'OH'" FullSelectorArgument="&lt;wnd ctrlname='txtState' /&gt;&lt;ctrl name='Employee Search' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtState' /&gt;&lt;ctrl name='Employee Search' role='editable text' automationid='' /&gt;" Guid="b36e2c56-1178-4a5e-bcaa-5a1892ba9d1f" InformativeScreenshot="a3d2f2a0a732316b5f19ca052f2e24b8.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
+                                <uix:TargetAnchorable.Anchors>
+                                  <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                                    <uix:Target DesignTimeRectangle="388, 315, 37, 15" ElementType="Text" FriendlyName="'State'" FullSelectorArgument="&lt;wnd ctrlname='lblState' /&gt;&lt;ctrl name='State' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblState' /&gt;&lt;ctrl name='State' role='text' automationid='' check:text='State' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACkAAAATCAYAAAANgSQ9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD4SURBVEhL7ZTNEcQgCEatynroxmLsxVrsgAxRIkHJz6yzuwcP7xBl5PmpcTln/HeW5CyW5CxsyQjonBMAxlHdFxhLpoCexCAeYxGEZN0AxPp9xZtag6FkCn5f2IfUzRERSrpPGr+ptRgnKY5ai3LTA0qbk2d8wGTV0jpGvewjMe8kp8lI2ct06ga5vq+NCLSmFhZXS2M/nEqT9RhSGRtKqnRMye5BVj6RJFiUG+nG/L2L3SR5d99HGA8HjtRyThg8NWpJnqXP81pCb7AlLv8WQfTrMSTLwo0mWKj3iqBjkg/N66RULY3ph9Otf+bRcf+aJTmLJTmHjBu5c27FzA9lNAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
+                                  </scg:List>
+                                </uix:TargetAnchorable.Anchors>
+                              </uix:TargetAnchorable>
+                            </uix:NGetText.Target>
+                            <uix:NGetText.Text>
+                              <OutArgument x:TypeArguments="x:String">[State]</OutArgument>
+                            </uix:NGetText.Text>
+                          </uix:NGetText>
+                        </Sequence>
+                      </ActivityAction>
+                    </uix:NApplicationCard.Body>
+                    <uix:NApplicationCard.TargetApp>
+                      <uix:TargetApp Area="52, 52, 829, 494" FilePath="C:\Users\hanie\OneDrive\Documentos\UiPath\Github\UiPath-Employee-Data-Migration\employeelist.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABZSURBVDhP1cwxDsAgDANA3pb/vyerkYdIIXIVVDqU4QaM4wHgiAzJ3dFhTx4TC2b26GcDfCjqMPB/GVCFmmWXDHTagZpFzpvw3YCyPaDUsSz3lqM3ZLgPYwJ8BMgzsjwnNAAAAABJRU5ErkJggg==" InformativeScreenshot="ea629a1d197f7824a397d3f6fe4e030a.png" Selector="&lt;wnd app='employeelist.exe' ctrlname='Form1'/&gt;" />
+                    </uix:NApplicationCard.TargetApp>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </uix:NApplicationCard>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_8">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[InsertJsTxt]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[InsertJsTxt.Replace("FIRSTNAME",FirstName).Replace("LASTNAME", LastName).Replace("PHONE",PhoneNumber).Replace("EMAIL", EmailId).Replace("CITY",City).Replace("STATE", State).Replace("ZIP",ZipCode).Replace("JOBTITLE", JobTitle).Replace("DEPARTMENT",Department).Replace("STARTDATE",StartDate).Replace("MANAGER",Manager)]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:InjectJsScript InputParameter="{x:Null}" ScriptOutput="{x:Null}" DisplayName="Inject Js Script 'BODY'" sap:VirtualizedContainerService.HintSize="334,116" sap2010:WorkflowViewState.IdRef="InjectJsScript_1" ScriptCode="[InsertJsTxt]">
+                    <ui:InjectJsScript.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="21232a3f-62b5-4467-8e38-636db351f1a3" Selector="&lt;webctrl tag='BODY' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:InjectJsScript.Target>
+                  </ui:InjectJsScript>
+                  <uix:NClick ClickType="Single" DisplayName="Click 'Submit'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_4" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="56cc2026-cbe6-4710-a5f9-fc6886e21232" Version="V1">
                     <uix:NClick.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="386, 111, 130, 27" ElementType="Button" FriendlyName="'Search'" FullSelectorArgument="&lt;wnd ctrlname='btnSearch' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='btnSearch' check:text='Search' /&gt;" Guid="a5c8663f-db2c-4cdd-8ae8-62da3d95ff0d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAIYAAAAfCAYAAAAiELUaAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAISSURBVHhe7ZoxTsMwFIZzg57HUm/Qa2SDjYUBCjtYbN3gEJmgA1AuAKqQF9ShUykUqYIFujzyrLixk9dKIJAa9x8+VbVfnEr/l+dUcjKfzwmAKhADiEAMIFITYzh+o3bviVrHhpL9RxA5nfORzbzqQSAGF7AQ3f6EZh9ftFgsQMRwxqeDF2odmZocgRidixHpu6m4CIiXw6uJ3SV8FwIxuLWgU2wfr++ftmsELgRfcjGkC0H8cPaBC8EXiLG1QAwgAjGASHxiZCklSeKRUibV/TVGk+L7pZk83zDiEkMIJ0shxm+ISgyjle0SShtx/l+BGBuMt42IcrjwHEqT+cm425Yq4/Zebkypcs6t00DiEiPHdY0gNDuXUcpj7ol2QVaf8EKuIOxEkTbF/FKASuiVcfc70syraRDRieEoBSlCrb2UFlRFKQi7QCnByu3K1br1fMH8uoYQrRiM/9SuDDQnSz0ZpI4hiFHrBBBjczE6LVv+wpBWHHjRMZYdwfuXkul8LqwLBBLEEMf8cYixebhQS7x3A2YpR2Xe22ZU/vJoP1eJIawT1EIMEDMQA4hADCACMYDIWjH4vCdOcG0ffIJrrRh87q/bfxYvBvFycju1p8V9FwIxhuOZ7Rqng6m1SFoExANnfHA5sZlz9r4LgRgMF3R6D5Ts3lCycw0iprU3oPbZfU0KpiYGAAzEACIQAwjM6Rv0JeCF25PPkgAAAABJRU5ErkJggg==" InformativeScreenshot="6d1fca0c70ae6ffdf939401c48c66556.png" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector, Image" />
+                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 836, 140, 40" ElementType="Button" FriendlyName="'Submit'" FullSelectorArgument="&lt;webctrl tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='BUTTON' type='button' aaname='Submit' check:text='Submit' /&gt;" Guid="bea4c64a-4fa9-4fa9-a447-3ddd6604b68d" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJAAAAAsCAYAAACKTjG2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANrSURBVHhe7Z3LbtNAFIa9hA0oO1SEuKmUi6h4JzYs2SGqPgHkKaqs8wIIQYtYlDdoRYANm0pIUSjrw/nHM/axPSGOhzZx9B/pUybHM8bufDkzqVSTnZ2LvPsq8n4i8uEbIYuBK3AG7mRohAOff4p8/KF8JySCugFHgi9wJwuV58svkRfPX8qzK5k8yghpAjfgCFyBM3AnC5UHBx5qp6fXr8nuYEBIA7gBR+BKqEROIJQm2EV5yCLgCFyBM6VAur6hRMUGEFIHrsAZCkQ6QYFIEhSIJEGBSBIUiCRBgUgSFIgkQYFIEhskUPOat7Pq+1aYe+80fhHzzq/5HSUL73vChgiE6z2QidiYyvHeQG4sIwHue+9QZmb8f5Vo3vl9/s/vTzLUdp8k2gCBYvKEWFKCeRMc69uFyPlRdXZHJy4j00N5q+8p0CXyRK91eDTNJ0BOZOzy+3IcUqcHcs/dT3lPVgqMx+sDfX2Mdm2CQz8QG7etr6Ed3tvjNucwbVRH188INNT83exq2X/N2SyBigmoTYq7n7JKTUa5DPWx+PRXBBqFdh4Yt1Ufp4KWAmvo+5v2OMLnYhWo0s/H7Ghfr68fEvVeIDcpQRYfmOhwHJUlqy1z7QSKB8beseMiMZvOk4ICrSVYesan/qdvQz/5t/RYZ4F0fP5vmCVR+72x44qlzvSJ5fRcMYFcjkvY6qnuX0z4Ce+0hLkJ1vMjX1S5fJ9VH4ef2T9zcwTiJnrl+M2vtu1m1VakfElbVqBcFDeZkbwVA5v0+r4olqNAawfkKZcJ7B1uu/Kf6d7nVZHvJlDLCuTFiMnSRSBUSwp0iVT3P+FrvFJMeFMgiJaPL3NNgTR00vN+1b0M9lUXIpC/fmzSw/2tO70XqLq8RMJ/qvEXBNGNdoiYQJGAjPe138UI5CP0jd3vmtF/gYC7XlNNQuhE5N/C0A/L2mvzTUlDpRmHCW4IpBPc8vdAKQJhiWx8i6RAq6B5zc1JKDfcoPjts28XG2Z/3FUH3wZuP+TbkCPPlX1a5cwxez57XX2RB2yQQGQVUCCSBAUiSVAgkgQFIklQIJIEBSJJUCCSBAUiSVAgkgQFIkk0BeIj7khLoo+440M2SRvgRuMhm3zML2kL3IAjlcf88kHjpDXqRqg8wD1onP/VAVkWuAJnzs5F/gLwVzKm40IeXAAAAABJRU5ErkJggg==" InformativeScreenshot="bb3a085cb08813ab786862be30f6944f.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image" />
                     </uix:NClick.Target>
                   </uix:NClick>
-                  <uix:NGetText DisplayName="Get Text 'First Name'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="170, 179, 175, 19" ElementType="InputBox" FriendlyName="'Amabel'" FullSelectorArgument="&lt;wnd ctrlname='txtFirstName' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtFirstName' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="8ea48d91-ef04-4788-88a1-f31b60345d5b" InformativeScreenshot="f88c4c9f08ba486a05ec7f9eb1f497cd.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="51, 177, 67, 15" ElementType="Text" FriendlyName="'First Name'" FullSelectorArgument="&lt;wnd ctrlname='lblFirstName' /&gt;&lt;ctrl name='First Name' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblFirstName' /&gt;&lt;ctrl name='First Name' role='text' automationid='' check:text='First Name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEcAAAATCAYAAADCrxD+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFUSURBVFhH7ZTREcMgCECdinnYxmHcxVncgEYDEY16Nu31rnd8vGtrQeBF41JKZIwxOQtMzgKTs8DkLJjICYTOkdNgoBSwfAcfBzkPiZ6Aa2Co6wHva79mLQc8Rb3+VA7nDQdVcnS9/5PzkOWgWo6K+e+T0w3lHFLor+NxFWVIvdbUkn0ACSHH5H06OX0t6evKBfU/ECLUWF1vts+E7XdOaXIoB8jHM+8cqP4Wtk5ObpS/5/2nOaMeeMjoWUoREskX2dIPzySyJLd/WIrPT46KuZqTGF7flnPFHqeoz5E4pumBB5T6Urt5WNz7jV/J0TGFZuA9Ob2EnCP5pe6ohw05/X87fF9Ooc2XxrbkHOgTiKG9Hs2Qb8ip0s93WqkdPF+5MV+VI0/4RO56hvfL9Md4KLnGF6HqNMLx8i2f78rRtS50j3cmcoyMyVlgchaYnAUmZ0qiFzWzyyhzaOBBAAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[FirstName]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'Last Name'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_2" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="170, 225, 175, 19" ElementType="InputBox" FriendlyName="'Prop'" FullSelectorArgument="&lt;wnd ctrlname='txtLastName' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtLastName' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="67554ae3-89df-478f-aaca-bad031200fd1" InformativeScreenshot="56e38eb1873294cbf9dd4250156f6f9e.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="51, 223, 65, 15" ElementType="Text" FriendlyName="'Last Name'" FullSelectorArgument="&lt;wnd ctrlname='lblLastName' /&gt;&lt;ctrl name='Last Name' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblLastName' /&gt;&lt;ctrl name='Last Name' role='text' automationid='' check:text='Last Name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEUAAAATCAYAAADGWsDDAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFJSURBVFhH7ZThEcMgCIUzFfOwjcO4i7NkA6pGDBLMaa/tXVt/vLtGIA8+abZ932mp1YJiaEExtKAYWlAMdaB4wm2jDRwFM/4CBUeQPKLQn+cer2ef1nuheOwPKKBIn5+HcjughCJyvg+KGuSMl3wW+jqcPGs8+F2AhJBykHw8b6D0/GotiDgQIpy50q/bt63nN6X8NcCFMgiQC23O0KYkj/L7fJdRI/ya2hgLrsDIIAK5DJn7KbMwJK7VlyQ0D0VRT03Wpsoz5w5Dqblxa3SN4acHY3/2bi6pwLzoVVB4yGwuby7FpXkz6BgUPXyq6fpNQNGxEU1AadfSNmvrOGcIShTnHzU3fjObUmEf36zs7d0R42eleyhC2VBsA8SPHJ/zjR4qzej36HU1oMj8DLLjNwVFelXJHq/qQPlvLSiGFhRDC4qhBeWinR7peFRcSSG/WQAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[LastName]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'Job Title'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_3" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="510, 173, 162, 19" ElementType="InputBox" FriendlyName="'Sales Associate'" FullSelectorArgument="&lt;wnd ctrlname='txtJobTitle' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtJobTitle' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="a9edd624-a3f9-44fc-949c-40fbf0af35e0" InformativeScreenshot="36ae762952557027242205749a1fb167.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="385, 177, 54, 15" ElementType="Text" FriendlyName="'Job Title'" FullSelectorArgument="&lt;wnd ctrlname='lblJobTitle' /&gt;&lt;ctrl name='Job Title' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblJobTitle' /&gt;&lt;ctrl name='Job Title' role='text' automationid='' check:text='Job Title' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADoAAAATCAYAAADBGB7WAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEESURBVFhH7ZXtDQMhCECdynnYhmHcxVncgFYrnMXP5JK2sf54yXlY4InNmRAC/QNHdDeO6G4MRT1aMsYQuHZccJD2WfTteMITWpP2VVgkP8uxVKPPB0UvOO/bfp0jr6X2NqIKB69pf0c0F2P06VsAshyP17HIVTKbKEsK4GpRj1etyKBeZF2UJWPRXiwXm01sJhrX44k6gucz9yLSvG6wLFoVLpP3TrtT+LZofq64J2oJ/W+JNn8/YSDKnwMgF9eqkXLacsLq6kqTihXRKkcZ54Pk3lIc00Akn6IhWn7vXtOUGAtlpFH1PjG4Riui8j/kXDousozqVTG8ujtxRHfjiO5FoAe1LaUuttsDgAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[JobTitle]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'Department'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_4" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="510, 220, 162, 19" ElementType="InputBox" FriendlyName="'Sales'" FullSelectorArgument="&lt;wnd ctrlname='txtDepartment' /&gt;&lt;ctrl name='Zip Code' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtDepartment' /&gt;&lt;ctrl name='Zip Code' role='editable text' automationid='' /&gt;" Guid="48058df8-102a-4995-8439-1e7ca138b527" InformativeScreenshot="15236934b7309c1f64ce68e91c349063.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="387, 223, 76, 15" ElementType="Text" FriendlyName="'Department'" FullSelectorArgument="&lt;wnd ctrlname='lblDepartment' /&gt;&lt;ctrl name='Department' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblDepartment' /&gt;&lt;ctrl name='Department' role='text' automationid='' check:text='Department' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFAAAAATCAYAAAAH3YpvAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFuSURBVFhH7ZRdlgQRDIWtKuvJbizGXqzFDkwhQVQzqo1+mPZwT52KSK7Pj3LO+aP3dQAu6gBc1AG4qANwUR2AxqNSXjUCbV/kfrfGAEF7SzGrIYFE0+RulsHYF82LsZ2a7DsN0DnrNYSTCF7bOnevDKbT/2mAs30fACynMBe12kPIY3E+7R4glnEe681p4wo90iKywunnPIAqH65cuiGcF2pOeBR1aIzhZQ1u3VsA01tIOVycjYb/bC7Nl/NKvQw6xPNC5Qm/nYQMUNZOPtpb8twj99l/AtlAq8pcBlYbr/9JAmDTswuQarWbk/IJ4ITHcZ0/Bci7i95c/21DoQFANhbH6rwNAGc8fgygWHiI8UIIaIwZLXee5rM5NPKKCdMdgGUuxR4AnPLYqXPr29EYoBC/K5WywSaHzdUio/UYXA94/A4ACi+hxhOAYf5vHjt1bn1j7K4OwEWRuWLm/+oAXNQBuKg9AL9IB+CSnP8Bqir7jHHA/BwAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[Department]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'Email Id'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_5" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="170, 269, 175, 19" ElementType="InputBox" FriendlyName="'aprop6@dxyl.com'" FullSelectorArgument="&lt;wnd ctrlname='txtEmailId' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtEmailId' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="fc6ba2ca-c7a7-47af-a53c-e05ea0f9c99a" InformativeScreenshot="4be81dbb4ff49dd1c34065d3f6bb4cc2.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="51, 270, 50, 15" ElementType="Text" FriendlyName="'Email Id'" FullSelectorArgument="&lt;wnd ctrlname='lblEmailId' /&gt;&lt;ctrl name='Email Id' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblEmailId' /&gt;&lt;ctrl name='Email Id' role='text' automationid='' check:text='Email Id' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADYAAAATCAYAAADbJP5YAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADVSURBVFhH7ZTRDcQgCECdinnYhmHcxVncgDttsWB7TWvT5DR+vMQIBZ6auhgjj8gU640p1hvHYoEYnGOnAAr7vBY8bvX02uQFJkh9kb3ZXwgE+Tv0+5hwLgbE4Sj+hGHFNH8jVvZBPVVgxKVRBr3NFaRW442JjKZdrC5SCZdmWUaGAaZQ1fslc1VszZND85hib9zY2kDEZLCloRKrDqhVrBZ57yleEJNhTmX6E7PP0uQ1iNk+EnsipkkyN25Mhs7x78+m5DWIbbUt98UGYIr1xhTri8gfREaJEvAfArkAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[EmailId]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'Manager'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_6" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="510, 269, 162, 19" ElementType="InputBox" FriendlyName="'Wilt Prop'" FullSelectorArgument="&lt;wnd ctrlname='txtManager' /&gt;&lt;ctrl name='City' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtManager' /&gt;&lt;ctrl name='City' role='editable text' automationid='' /&gt;" Guid="46442392-80ed-4f07-bd19-bc559b450972" InformativeScreenshot="4d3b84bffa768f53cca510a2aed41b84.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="387, 270, 56, 15" ElementType="Text" FriendlyName="'Manager'" FullSelectorArgument="&lt;wnd ctrlname='lblManager' /&gt;&lt;ctrl name='Manager' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblManager' /&gt;&lt;ctrl name='Manager' role='text' automationid='' check:text='Manager' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADwAAAATCAYAAADMBm6RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFRSURBVFhH7ZX/0cMgCIadinncxmHYxVmyAfUHEDRV2/vy3aVp/3ivFQ/kATRu2zb6Jv2A764f8N01AEbyzpHLgkDR7KFnuwMK0fp8htbADdjI/jmaAgNAgYMQqx19AQW4a4e9518s9hhSAdKIhzLWDBwDQek4S65AKU5epwL1eyMfOcPuJXmse0O/3u48IcfrtQBGvrM5QKSQO6u2Jx1myDIRClyTEhBNfuIjEyXvRfXZcyp+ApnXCryeuiWwJOFDDZoPPwB3FW6AOUEB1uvxxKcF7Iok8XpZYDMpI62B+X+9z3VULLAkeejQBHjkMwM+FMzqXGDzKWrWGZjHnOGbpIbAOPRpoSQ2F0AnwtxPTO9JnrKzgSV5qfwOvO+VRO2rPunw0Edjt3tybn8NNIe/A19DUiQFPkEXBuYpe6Fr7+hiwAwpOhk269Ij/R/6MuCNHhj+5tnGPHf3AAAAAElFTkSuQmCC" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[Manager]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'City'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_7" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="170, 312, 175, 19" ElementType="InputBox" FriendlyName="'Milwaukee'" FullSelectorArgument="&lt;wnd ctrlname='txtCity' /&gt;&lt;ctrl role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtCity' /&gt;&lt;ctrl role='editable text' automationid='' /&gt;" Guid="f699a76f-5bdd-4dbe-98e4-4b311cbf6973" InformativeScreenshot="3e7301442a36c97205cf17de54561cd0.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="51, 315, 28, 15" ElementType="Text" FriendlyName="'City'" FullSelectorArgument="&lt;wnd ctrlname='lblCity' /&gt;&lt;ctrl name='City' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblCity' /&gt;&lt;ctrl name='City' role='text' automationid='' check:text='City' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAATCAYAAADxlA/3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADpSURBVEhL7ZTREYMgDIaZinmyTYZhF2Zhg7SpCVKIAa/1fPHhu7NC4+efYCil0J08Ao+AK5AxUgihEjFTSbBfG/85y6FAgu2hkPReIrQE5Pe+7xy2QEaK76IB0rjWMYqewxTQ6M2iTQL68AogYeTrSJh5fyLg+xEp93UEU2ArrEU6uhb0Caj8Z12S9ObFEZgnYO5t2rfJHLyIYM9AP2jO2iibpQ1AwGtO/IwtUIu0he1TYM1Le3y9+JkDAWaX+Co2pCODxuip0TZM4mccgV8Q+Un8zDUCC9Ov/F1Ah3LlI8Zc1IJ1bhYo9ALWdDDj0GMpxAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[City]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'State'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_8" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="510, 314, 162, 19" ElementType="InputBox" FriendlyName="'WI'" FullSelectorArgument="&lt;wnd ctrlname='txtState' /&gt;&lt;ctrl name='Employee Search' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtState' /&gt;&lt;ctrl name='Employee Search' role='editable text' automationid='' /&gt;" Guid="acd3fb49-4f06-4154-a826-bc62a755b538" InformativeScreenshot="2defac9e2ec5c3104694d39851b94774.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="388, 315, 37, 15" ElementType="Text" FriendlyName="'State'" FullSelectorArgument="&lt;wnd ctrlname='lblState' /&gt;&lt;ctrl name='State' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblState' /&gt;&lt;ctrl name='State' role='text' automationid='' check:text='State' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACkAAAATCAYAAAANgSQ9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD4SURBVEhL7ZTNEcQgCEatynroxmLsxVrsgAxRIkHJz6yzuwcP7xBl5PmpcTln/HeW5CyW5CxsyQjonBMAxlHdFxhLpoCexCAeYxGEZN0AxPp9xZtag6FkCn5f2IfUzRERSrpPGr+ptRgnKY5ai3LTA0qbk2d8wGTV0jpGvewjMe8kp8lI2ct06ga5vq+NCLSmFhZXS2M/nEqT9RhSGRtKqnRMye5BVj6RJFiUG+nG/L2L3SR5d99HGA8HjtRyThg8NWpJnqXP81pCb7AlLv8WQfTrMSTLwo0mWKj3iqBjkg/N66RULY3ph9Otf+bRcf+aJTmLJTmHjBu5c27FzA9lNAAAAABJRU5ErkJggg==" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[State]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
-                  <uix:NGetText DisplayName="Get Text 'Zip Code'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NGetText_9" ScopeIdentifier="d27f44ff-a11a-49be-810e-b70623732f8b" Version="V1">
-                    <uix:NGetText.Target>
-                      <uix:TargetAnchorable DesignTimeRectangle="170, 359, 175, 19" ElementType="InputBox" FriendlyName="'53201'" FullSelectorArgument="&lt;wnd ctrlname='txtZip' /&gt;&lt;ctrl name='Enter the Emp number' role='editable text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='txtZip' /&gt;&lt;ctrl name='Enter the Emp number' role='editable text' automationid='' /&gt;" Guid="83326b39-bbf6-4719-bfd5-5043eb90f694" InformativeScreenshot="2db56350980ebad94e391fba4e0abe4f.png" IsResponsive="True" ScopeSelectorArgument="&lt;wnd app='employeelist.exe' ctrlname='Form1' /&gt;" SearchSteps="Selector, FuzzySelector">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="51, 360, 55, 15" ElementType="Text" FriendlyName="'Zip Code'" FullSelectorArgument="&lt;wnd ctrlname='lblZipCode' /&gt;&lt;ctrl name='Zip Code' role='text' /&gt;" FuzzySelectorArgument="&lt;wnd ctrlname='lblZipCode' /&gt;&lt;ctrl name='Zip Code' role='text' automationid='' check:text='Zip Code' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADsAAAATCAYAAAAu2nXoAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE1SURBVFhH7ZTtDcQgCIadynncxmHcxVm6AXda4Sjix5lc0mv740kaaV94gWq2bYO78Ji9Ko/Zq6Kajd6CMabGeojB5WfrY/XdCKn7rQZ+74IeHzEx2Qje7sXlJItmg2Ma+SyAP5tZmkaaqhKfInqwScMFPT7Jj80GcKlIY8HHcsYni8/O7WYSSlOGRRYdhG8NNZtBOthEZDCQrllKxCeimMUk+L5c8X2FWcM4qFFyHBojYsdfoQwCa5vYnrZZ6pooUjFL5hoJ6/+1E2MaMqY2QrJiFhPJKa2Yrd5jrJptbVEP3Sx1zUFoxLhZucZUOCFu9HxWbmPRiLYhoUGbx2oMXv9VCorZj2hFMqWZ5TTXqNalqQgdOn+D0+VQw8gw0rgXCt0LaoiYytl5zE5zK7N/xo3MbvACDQXXsYk+wtkAAAAASUVORK5CYII=" SearchSteps="Selector, FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NGetText.Target>
-                    <uix:NGetText.Text>
-                      <OutArgument x:TypeArguments="x:String">[ZipCode]</OutArgument>
-                    </uix:NGetText.Text>
-                  </uix:NGetText>
+                  <Assign sap:VirtualizedContainerService.HintSize="334,61" sap2010:WorkflowViewState.IdRef="Assign_9">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[counter + 1]</InArgument>
+                    </Assign.Value>
+                  </Assign>
                 </Sequence>
               </ActivityAction>
             </uix:NApplicationCard.Body>
             <uix:NApplicationCard.TargetApp>
-              <uix:TargetApp Area="208, 208, 829, 494" FilePath="C:\Users\hanie\OneDrive\Documentos\UiPath\UiPath-Employee-Data-Migration\employeelist.exe" IconBase64="iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABZSURBVDhP1cwxDsAgDANA3pb/vyerkYdIIXIVVDqU4QaM4wHgiAzJ3dFhTx4TC2b26GcDfCjqMPB/GVCFmmWXDHTagZpFzpvw3YCyPaDUsSz3lqM3ZLgPYwJ8BMgzsjwnNAAAAABJRU5ErkJggg==" InformativeScreenshot="34bb10b840004fb58f341a4b9d324972.png" Selector="&lt;wnd app='employeelist.exe' ctrlname='Form1'/&gt;" />
-            </uix:NApplicationCard.TargetApp>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-          </uix:NApplicationCard>
-          <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Chrome: Automation Anywhere Labs - Employee Data Migration" sap:VirtualizedContainerService.HintSize="434,1632" sap2010:WorkflowViewState.IdRef="NApplicationCard_2" InteractionMode="DebuggerApi" ScopeGuid="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Version="V1" WindowResize="Maximize">
-            <uix:NApplicationCard.Body>
-              <ActivityAction x:TypeArguments="x:Object">
-                <ActivityAction.Argument>
-                  <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
-                </ActivityAction.Argument>
-                <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="376,1416" sap2010:WorkflowViewState.IdRef="Sequence_4">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'First Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_2" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[FirstName]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 543, 535, 38" ElementType="InputBox" FriendlyName="'INPUT firstName'" FullSelectorArgument="&lt;webctrl id='firstName' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='firstName' tag='INPUT' type='text' aaname='' /&gt;" Guid="bd1ba3d8-afac-4c33-be03-4d2cf9ae00eb" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhsAAAAqCAYAAAAanpmcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dgxjsMgAETRvf9tbQpKVhRjOZKLJMp070uvAvoRf0uSJKmYsSFJkqq9jI055xpjrPM8AQA+tnfE3hP3rrGxD47jeHwIAPCuvSfug+MaG340AIBf2bsiXWPj6SIAwLeSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXJ2AAAKpKxAQBUJGMDAKhIxgYAUJGMDQCgIhkbAEBFMjYAgIpkbAAAFcnYAAAqkrEBAFQkYwMAqEjGBgBQkYwNAKAiGRsAQEUyNgCAimRsAAAVydgAACqSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXpGhtjjMeLAACf2rsiXWNjzrmO43h8AADwrr0n9q5I19jY7QM/HADAt/aOuA+N3cvYkCRJ+nXGhiRJKrbWP6cSUi+EL6h/AAAAAElFTkSuQmCC" InformativeScreenshot="f6d73d8c61881ffe1061fdc64be4f6cb.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="740, 511, 78, 24" ElementType="Text" FriendlyName="'First Name'" FullSelectorArgument="&lt;webctrl aaname='First Name' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='First Name' tag='LABEL' type='' check:text='First Name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFIAAAAcCAYAAADyfuiHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJnSURBVGhD7Ze/TgJBEMa38QFoRAqNBQUJb8B7mJiQGBNJkIYCHuV4k8MYGx/AjtwDWJPQGetx9t/d7DLIcYxozH7JxeyyN/Ptb3cGVJAkogRSSAmkkBJIISWQQkoghZRACqkCuc5hPhjAYMczX27Mss1yDoNZDnbUXMViDvnaDRgVC513xxrnNVu58R9QAHKk1GnMrTJQarQXpGor/tBO6bWmfhHkuAbIc7hAT74aSv0HkGFpF5Dp8ltmrgX4UtxAPgtbg4+r31eqjXMK/zKQnAzI6RvkpsQzzETEecW5uDXRz73vQv8t11i/5jM/x1SAbTPhO7EEQOrgdKMO4oJsHW9gYKDmjbR5XA4aL/aK49vIuz2wYZnDjrFVlHFs3EtmjuayEMn+jPdtTiIgw1vFzUWq2SN9Hg+BgqNeQ09OuGYSrYkPbwsSiubVMe4YJsEapwDkpNOHNr5YXWP3kBPiQHKJzOnHm/M6ECRmda3CbfqbQzf+0JNSLbi+imBH0LgDoHm5d4xMhYXzIjfyuw1xh3E4SBT6u9eHo+N8PG2VNu2PZv7zGcZkTVOQqntW7SF4TgSSyhjC2GW5NwGJsnEe4eX9FabEK7dW70cCJHsjGZ0EpJYx6G9lQ5CY3ZS4avWgV5atnYt7soV+HMhdPrn3fgCknQs2hrGHNLYxWPdbOxLGelB9AtKtpZBwjf4W73SrKmgE0o+j2DcMpwBknX+79oPUsvO0p4Q3hvzOpL2TaCdIlN0czUvimUf/1HIeXPymILV8Pv9wjCqQSUcpgRRSAimkBFJICaSQEkghJZBCSiCFlECKCOALLWhmnVwTJu4AAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Last Name'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_3" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[LastName]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="1285, 543, 535, 38" ElementType="InputBox" FriendlyName="'INPUT lastName'" FullSelectorArgument="&lt;webctrl id='lastName' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='lastName' tag='INPUT' type='text' aaname='' /&gt;" Guid="cada6645-4d38-496f-b166-e7c56cdcbb6c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhsAAAAqCAYAAAAanpmcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dgxjsMgAETRvf9tbQpKVhRjOZKLJMp070uvAvoRf0uSJKmYsSFJkqq9jI055xpjrPM8AQA+tnfE3hP3rrGxD47jeHwIAPCuvSfug+MaG340AIBf2bsiXWPj6SIAwLeSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXJ2AAAKpKxAQBUJGMDAKhIxgYAUJGMDQCgIhkbAEBFMjYAgIpkbAAAFcnYAAAqkrEBAFQkYwMAqEjGBgBQkYwNAKAiGRsAQEUyNgCAimRsAAAVydgAACqSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXpGhtjjMeLAACf2rsiXWNjzrmO43h8AADwrr0n9q5I19jY7QM/HADAt/aOuA+N3cvYkCRJ+nXGhiRJKrbWP6cSUi+EL6h/AAAAAElFTkSuQmCC" InformativeScreenshot="c691dbfee657bc0560d7042ecb873d4a.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="1285, 511, 77, 24" ElementType="Text" FriendlyName="'Last Name'" FullSelectorArgument="&lt;webctrl aaname='Last Name' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Last Name' tag='LABEL' type='' check:text='Last Name' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFEAAAAcCAYAAAAZSVOEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKqSURBVGhD7ZbNSiQxEMfzCu7Bj4t48OAz9JPIyuIHogh70XmLPeweZp5kR/Ekgm8wNHvbFxAG9OK5tlKppJNKNU73RBYkf2imO52kqn5VqR4DVWurQiygCrGAKsQCqhALqEIsoAqxgDqIz3OYNA1MF/z8gWpnE5g/84OmxRQa9GVyu+SBWEuY3zTQzFp+/v9KIJ4b8/EQEZAx5+9CNLsHsG9OlHkVIkO8XA3itoHmZo7YYn0GiHzs7XHzV7qGg1TeL28nCHALxwz+mp7jiiLQ1/D4YH+lTxrE3GbynnzGFrJIfSf7STx5m7E+hz3x0vgMg4hzDsUcB+aIjSsBIpDEuVUrEY/83RvA319Yjc0Uuh2lDcUmxxKShM9XO1+SfdpZQwmSY/Gzi+1r5yvHL5M/CCJlRR4v62BY18IUs9VbYVYMaBWIv1/wHvc/scH2QcP3VGXJfvmcCxk82RDx0tgZ76XH4iozTuoaPdGXuTEbsLfbrQsZznoZawBEP8dVhLehVJ4XAbXVxD5EELPYaEz44ZP36u+vcj8pIcfJ+ODjHPcUmvt2D5dinQccrjjgERADOKoACdG/i23llahBPDWn/RD//MSP2x5s2GTEsdCVVv4giNQzlOMsIcbyVRSOxSiIKLTzjfZp4el7VGU01x9BrwIQ2x94r1SiogEQnWNaj8h6ixDBT4IeARHlbW1udRCp6pXE2h44GiL34iMtLpyzVk+UXy+7xn6tdvZ9pSnNWDpDjq72dc7nuETGEN3c2G83x5jNDq4WG471QfRjLmmH0Rz9Y5NAlP//usuD42MSxm1vcBuHoNhQvD41Gu0R1ghRtvP/bCR6l66lahT2koRzbBJi9lVX7Gp7S3UQq0arQiygCrGAKsQCqhALqEIsoAqxgCrEAqoQ1xbAP4MP5LsepbUEAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Phone Number'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_11" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[PhoneNumber]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 475, 535, 38" ElementType="InputBox" FriendlyName="'INPUT phone'" FullSelectorArgument="&lt;webctrl id='phone' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='phone' tag='INPUT' type='text' aaname='' /&gt;" Guid="7447a67e-4087-4fac-b531-6c97030dd477" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhsAAAAqCAYAAAAanpmcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dgxjsMgAETRvf9tbQpKVhRjOZKLJMp070uvAvoRf0uSJKmYsSFJkqq9jI055xpjrPM8AQA+tnfE3hP3rrGxD47jeHwIAPCuvSfug+MaG340AIBf2bsiXWPj6SIAwLeSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXJ2AAAKpKxAQBUJGMDAKhIxgYAUJGMDQCgIhkbAEBFMjYAgIpkbAAAFcnYAAAqkrEBAFQkYwMAqEjGBgBQkYwNAKAiGRsAQEUyNgCAimRsAAAVydgAACqSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXpGhtjjMeLAACf2rsiXWNjzrmO43h8AADwrr0n9q5I19jY7QM/HADAt/aOuA+N3cvYkCRJ+nXGhiRJKrbWP6cSUi+EL6h/AAAAAElFTkSuQmCC" InformativeScreenshot="9ab11cb877070be62e7a3c25f7b0a62a.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
-                            <uix:Target DesignTimeRectangle="740, 443, 108, 24" ElementType="Text" FriendlyName="'Phone Number'" FullSelectorArgument="&lt;webctrl aaname='Phone Number' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Phone Number' tag='LABEL' type='' check:text='Phone Number' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAHAAAAAcCAYAAAC51jtqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAMlSURBVGhD7ZfNbhMxEMd94QHgQOkFcegBiTfIeyBVrYAGRYVIXNp9C5DgkL4IJBxRERIPEK248QKVIsGF8zCesXc9Y2/qlhCw6r+0yn545+P/8643BqqKVgVYuCrAwlUBFq4KsHBVgIWrAixcPcCLOTSjEYyS2wxaN8xqtWhgdDqHlTv+77ScUd3NIlXhCuan2NNZ2NHfUAuzwRo2JwFwYgzMlu44UHsmIZYA0Nx/CHvmCOYX7lynGwjQF+OvFQPwnknUeYMB+mIsQPPyM7QWJJ7nrYlmO4Hurutm2Mhm0bKhflxiYvAbwG9xnkgWoDmB80/2V/ekAcrJyVJjaHnBvEu5zFA/YukJa+O4J1/P6Vfco6R9krXYOBh3wcuC7j8PoLpGAPG4N8E1HJhvTTfmsE+GMQ7wnr4BvkcYjGOOxBgPL1iDCc7QRHOiMRP4+Avg+zusU6zh1wM43b0j4nB/MraslePuqP6kB97LA+HTvhjDcWQPvTIAumaCADxjVEAy7RkXgrGeJmLJ+7SRLDLBT4SBOGJMSg7ghx+4jzHspIgm2xUBHgtTUamJROeeOxjOeNWf9IDHiLionDFeAuB09xHNmPBxpk2ZRQm0gd60n7jfvqb98FEnYY4XXdNski4shJOcKFaYK3ney9Xi89s4vdnXAxhNbjqnehR5U3FRdJ+b6DR+mvTp2I8ZiuOUuQZKXQrw25u0wSJHHkCzd6ufSGLLB9gBoXs2B3BsxtL8bIBjeE8+vcWPrQdwG2PH/fm17l8AXPMETrpXTB7AtaCGFAFEYe4n2J/9aPryKnylbhkgjXEekE+JJ1Bo2wDdupO7Bq4DmASBSuYPteY++yq9uxMDlHXwuU0A1P0JDzDGYcpzjNP7tGWAviELQn+Fyq+rDID+OHwKMc7jy+ocAOhzSoDuaVM56QtzAwDFh07kAXtpzH4QR4O/AkD7f+ZPAOr/KDzbLADeZOw8gFYMcShOQolaOtE1jNMBtGKTfHxbE+UMAEbe0DmVQ+T1xsvYqdq1T9KTXIBVRaoCLFwVYOGqAAtXBVi4KsDCVQEWrgqwcFWARQvgN7nenEHJ7rQFAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Email Address'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_4" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[EmailId]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="1285, 633, 535, 38" ElementType="InputBox" FriendlyName="'INPUT email'" FullSelectorArgument="&lt;webctrl id='email' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='email' tag='INPUT' type='text' aaname='' /&gt;" Guid="8d4c3117-60b8-4053-9238-d4c3df05465b" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhsAAAAqCAYAAAAanpmcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dgxjsMgAETRvf9tbQpKVhRjOZKLJMp070uvAvoRf0uSJKmYsSFJkqq9jI055xpjrPM8AQA+tnfE3hP3rrGxD47jeHwIAPCuvSfug+MaG340AIBf2bsiXWPj6SIAwLeSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXJ2AAAKpKxAQBUJGMDAKhIxgYAUJGMDQCgIhkbAEBFMjYAgIpkbAAAFcnYAAAqkrEBAFQkYwMAqEjGBgBQkYwNAKAiGRsAQEUyNgCAimRsAAAVydgAACqSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXpGhtjjMeLAACf2rsiXWNjzrmO43h8AADwrr0n9q5I19jY7QM/HADAt/aOuA+N3cvYkCRJ+nXGhiRJKrbWP6cSUi+EL6h/AAAAAElFTkSuQmCC" InformativeScreenshot="c3958cded4e3cc6301ac7b22b5b9ed96.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="1285, 601, 102, 24" ElementType="Text" FriendlyName="'Email Address'" FullSelectorArgument="&lt;webctrl aaname='Email Address' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Email Address' tag='LABEL' type='' check:text='Email Address' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGoAAAAcCAYAAACJWipLAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAK4SURBVGhD7ZjNatwwEMd16amnnkoODT3k1jfwexRaCg0sS0ovPWQfZbeFPocDeYfewj5FYK89T2dkyZoZyZa8JG5F9QeT2BrN10+SnRhoqkINVCVqoCpRA1WJGqhK1EBVogaqEgVQjz3sug66yWsPR2f6bHrYszgn6G872N2d7N20BjvKcf/gHmXl5hzmKiqxWU8C1NaYBcU+twpBYd4b8wO+/zTQ3fY4q0QN1BOqDNTx0IHZ3sMJd6MxG+gf3cCs/hNQ1BwqwP5UR6N4potMHK8i3uKj7wh79DHY8N+1XNN93EMPv77hDhT5ZWwoN9yxva+P7V7Zh128WGxdzEbv/Nw46mxQBm3HpuDcm5dvbBD+jPzx+w/K/+luh34+hcKWgkJ7votsw6IiHQDVWMo/gCqwsbE0XA+Jvb+d3Vinvb9m8Fws4Xdm3EmA+nrxDl5TMpyuv9jEKLlEoTogQYmaSDFVUUtARWB0k0j2mT4Sh90nm1Vis5U2mP9nHQ/F87J1i15J5ca9zj/6VNPtM7EK0iuDNCRHK/YVvL08E1SySXHM5AJRdiU2MrdBk03mtpinP+6Tvc2NO60HiiU0JvX7Hr7wmAtAUZPsUcR80mXsERyal8qVxPMtsZkCZa5eiPjh4rZud46Xfo/lxlcElWwGxjwPlFoEXOhzw3z+lR01Kw9lal56fCVQ6ab7XbEYlIIh5eL6/NDnU72joubaeeq9hUqDZ8L8b8zHaN6oxPi6O4oXivHoK/Diin0ZFoKKfCkNC8A3UIFD0Xz5BVdgkwKFStX1nvUxtevsHBcrN+4lQM3/Cym87FKO7LMZUOP96I/O4blVOwVKzUnJ1RLmqtj4N5LMjZSxmQBFGmCFSy/2AQa3kX5y46QAqumfVgNViRqoStRAVaIGqhI1UJWogapEDVQlaqCqEMAfwAIcKpU4V7AAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'City'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_5" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[City]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 723, 353, 38" ElementType="InputBox" FriendlyName="'INPUT city'" FullSelectorArgument="&lt;webctrl id='city' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='city' tag='INPUT' type='text' aaname='' /&gt;" Guid="624fc9c8-1f3d-4472-864d-12cdb458f6a1" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAWUAAAAqCAYAAABr/Eq2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEeSURBVHhe7dYxjsQgAATB+/9vbQJCTgRjeSWn3p2gWqoISEf8LUlSTUZZkor6GOU55xpjrPM8AXjZ3tu9u/euUd4Hx3E8PgTgHXt378N8jbIfMsBv7P1N1yg/XQTgO5JRBiiQjDJAgWSUAQokowxQIBllgALJKAMUSEYZoEAyygAFklEGKJCMMkCBZJQBCiSjDFAgGWWAAskoAxRIRhmgQDLKAAWSUQYokIwyQIFklAEKJKMMUCAZZYACySgDFEhGGaBAMsoABZJRBiiQjDJAgWSUAQokowxQIBllgALJKAMUSEYZoEC6RnmM8XgRgHft/U3XKM8513Ecjw8AeMfe3b2/6Rrl3T7wYwb4jr2390HefYyyJOm3GWVJqmmtfx6wcH7rczDTAAAAAElFTkSuQmCC" InformativeScreenshot="ebeecac4a673826f21f2d60f2ecb10bd.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="740, 691, 28, 24" ElementType="Text" FriendlyName="'City'" FullSelectorArgument="&lt;webctrl aaname='City' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='City' tag='LABEL' type='' check:text='City' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAcCAYAAAAAwr0iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE6SURBVEhL7ZRBCsIwEADzFb+RfwiK4EEE7/YlUhHxG/XgN0ru3oW+wMu6cZM23Wy0osVLBoKkIZvJblYFfyYLZIEsIAo05wK01sEowbg1ooFqq6E4N25Oe8raTT6ACRgo7YHbCo/o8ELJA24VzJT6XsDs48M9z7UoEw4U2HwtgEGWr4LUJjg8KEFdgsJ9CjM0wV+9Ny5jctnsekgngIGSN4xgb4BnAOcrfhnpG9IKyNYpYoF1L3h821T8kQR4PDn9lp+VgAv4jnp+S6TfMvwR4nrRtuIQAeoctbvC/bJJXq4TQIa34TAB6pADHE/UHRI9AZ+2939EscBCzB7Fs20arxFMgKDbhoOnjwkg7R4m389cjCjwO0g0lX7LuAJYmrmaQnVzc4GRBNxbwpGqvWfkErwnC2SBPwsAPADe8x/IG+YWwQAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'State'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_6" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[State]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="1103, 723, 353, 38" ElementType="DropDown" FriendlyName="'State'" FullSelectorArgument="&lt;webctrl tag='SELECT' id='state' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='SELECT' id='state' type='' aaname='' /&gt;" Guid="cb00996d-d795-435e-b572-94fbaf6fb02c" ImageBase64="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" InformativeScreenshot="450d9dbf53df01ee7a1f1a6ae62eca9b.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="1103, 691, 37, 24" ElementType="Text" FriendlyName="'State'" FullSelectorArgument="&lt;webctrl aaname='State' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='State' tag='LABEL' type='' check:text='State' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAACkAAAAcCAYAAAD815boAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGTSURBVFhH7ZVRasMwDIZ9isH2toddIicpDPowBntvjpLeJL1IySkKvYP321JiyXLTlBnKwD+Y1q4lf/6lpM7/AzXIWmqQtdQga8lCngffdZ0ex4l/TLqeej+cebJVl9H3hVz3pCDDwc7t/HjhhairHw8APYz4xsJhO+cehOQ8f4OkJP1pQUkKDsDRBQrzn+dATn4ASBFSCu3gAOiw9x2f8tDpyO0xj8V9yu3esBZiugErLDZgrbVUucMhAUCVtqSCkxFQxRFYOrTgJPJ8Ik8yptBakHlwjBsYpqxI/q0gCSjfp8EtpL0YhNxfmQEGMomdwIjuZiXSkFIy7mUFkvbZ9qJ9cn0FUoj7cAksQKoKMNi6kwT5Gg0QsTweh8wPyCEx3xec3QJpnbRKkPEl3mfvyFlZCXLIGCvaIYrLfhMyn8+iOHlh4SQHmcOgHAKQ4amUTuqnlFx07kPEFaBuxKWLkUy5w7+O6RFzW04WfpsTxovoGMolqrPsEWsAVe/JDDBoY08+Vw2ylhpkLTXIWmqQdeT9L9MsmC6x+0SCAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Zip'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_7" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[ZipCode]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="1466, 723, 353, 38" ElementType="InputBox" FriendlyName="'INPUT zip'" FullSelectorArgument="&lt;webctrl id='zip' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='zip' tag='INPUT' type='text' aaname='' /&gt;" Guid="d746c4ff-137a-4d14-a995-2ab8461fb7b0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAWUAAAAqCAYAAABr/Eq2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAPXSURBVHhe7d3Paxx1HMbxnMX/wH9AsOBBaBArmIK0mq1ibGItTV2iEUMs5mDEKlgKSmtAQVnRHKR4UsRuNT0Yf4B46CFrY5AePDbkR3PeDLOzs9ndx/mm/Yyz6RRrdpMM3fcDL1qyO3N8M0xm2h4xxhjLzIgyY4xlaC1RDoJAnudpfX0dALDDXG9dd5OLo+w+KJfLqQcCAHaG624yzHGUuUIGgL3h+muLo5z2RQDA7rARZQDIABtRBoAMsBFlAMgAG1EGgAywEWUAyAAbUQaADLARZQDIAFtbUfaDUGF4Z9WKeyHFU6Vqf08/DwB0O9u2o+yC/Pv5fj2ce0kHB1rl8m/oheG8Rr5dUqO+pK9OHNAzXy8SZgC4A1vHr5Tr0bmuXTil/Y+M6buVUBWPK2UA+C+2zt5T9mvS/LR67ntQU/NN1Svu561R9ipVhdWKfPdnHPNA/tZzAUAXsXUwypXoKnlBU4Mv61BhQar50c9ckJf0zfhR5S8uqVYLdf3ipHrf+k3Xfjqj3sMndHDguB7PTasUHV1NPS8A3PtsHYqyp2p9TcU3R9R/NApss3brytdFeVnF069qYmZ5M8qLl8+p71hOhyZ+1GoU4mZTKhWG1ReFea5R5YoZQFeydSTKXlDXysx76tk3ruJaQ6Fnn6VF+QM9+uSkvr8RXRlvfs9Xrbmgj469olOXlrn3DKAr2dqPsheocWNWA/ue0Osza2oEyaimRHnmrI6884uWaxV5t77nBxu6Oj2qpz+7qjBwtz3seADoDrY2o+wpbKypODmipyZntVIP4tDa56lRPj2rxWoyyjWVvhhV7vM/iTKArmRrK8p+ralSIa+eh8ZUjG9HJN3NlfLN71x6d0z9hRJRBtCVbNuPcurjb1vd7T3lv/Tx4El9+MeGAn/rOQDg3mfbZpR9BfV5TQ2+psELf0dHbySeOU4IKilRPqe+k0PKJZ+++GRI+ydmtbzx7y0NAOgmtu1F2Q8UXvlUjx0f14v50dtes96Ue14PnJ9To7Ha8pzy4uX3df+RH/Trz2d1wD2n/OyQeqMgrzZDHocD0LVsbdy+iMKcdnWctHl/2N3CuPlGn3ubz0X5ueEvVWo0VLfvJX7pBwDdyNbWL/r+r2SU53i1GgBitl2P8vXi2+o9XNAVogwAMduuRtnZ/AeJCDIAtLDtepQBALezEWUAyAAbUQaADLARZQDIABtRBoAMsBFlAMgAG1EGgAywxVH2PP7HDwDYC66/tjjKQRCoXC6nHgAA2Bmuu66/tjjKbu4DrpgBYHe43iaD7NYSZcYYY3s7oswYY5mZ9A+dX+L8Afdh3wAAAABJRU5ErkJggg==" InformativeScreenshot="820048439ec71ed6617f5b46bbebefaa.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="1466, 691, 22, 24" ElementType="Text" FriendlyName="'Zip'" FullSelectorArgument="&lt;webctrl aaname='Zip' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Zip' tag='LABEL' type='' check:text='Zip' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAABoAAAAcCAYAAAB/E6/TAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD0SURBVEhL7ZTfDYMgEMYZo7Owi2+dQEfBt46BiximMHGHKyfYAn4oJU0fGr6E+CcHv7vvTgX9SA1UrQaqVgQyoyQp82uYVhu1ku73+3IVVcQJCNGRXvyLCl2DZmUhgtTsnyt1ATKk2LbR+GdWbN06DSR7TYavL5uV3RnrBOQOPG46grhihu1dc72O92VB7gDUFwS6J3HOiXBgMGjR1Nks8WRh69LIrarAcgDyloHNTl8CXY9yCcgnmwUVjfIRlOtReE4AQqOMBEA3MHVJlW+QrSb83cC1JYEqepBmC/c40DMwDJ9p6xH4QFM1ULUaqFr/BiJ6Ai5xn3UxkYZXAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Job Title'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_8" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[JobTitle]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 813, 535, 38" ElementType="InputBox" FriendlyName="'INPUT title'" FullSelectorArgument="&lt;webctrl id='title' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='title' tag='INPUT' type='text' aaname='' /&gt;" Guid="5a87e365-a4cc-42c9-af00-cb98cf6f5fbc" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhsAAAAqCAYAAAAanpmcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dgxjsMgAETRvf9tbQpKVhRjOZKLJMp070uvAvoRf0uSJKmYsSFJkqq9jI055xpjrPM8AQA+tnfE3hP3rrGxD47jeHwIAPCuvSfug+MaG340AIBf2bsiXWPj6SIAwLeSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXJ2AAAKpKxAQBUJGMDAKhIxgYAUJGMDQCgIhkbAEBFMjYAgIpkbAAAFcnYAAAqkrEBAFQkYwMAqEjGBgBQkYwNAKAiGRsAQEUyNgCAimRsAAAVydgAACqSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXpGhtjjMeLAACf2rsiXWNjzrmO43h8AADwrr0n9q5I19jY7QM/HADAt/aOuA+N3cvYkCRJ+nXGhiRJKrbWP6cSUi+EL6h/AAAAAElFTkSuQmCC" InformativeScreenshot="13f8157b6b7cdb4d4ce3f8fd5909a053.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="740, 781, 60, 24" ElementType="Text" FriendlyName="'Job Title'" FullSelectorArgument="&lt;webctrl aaname='Job Title' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Job Title' tag='LABEL' type='' check:text='Job Title' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEAAAAAcCAYAAADRJblSAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGtSURBVFhH7ZbdbYQwDMezRdtVWKVvp0p9P0aBt47BLXJiipPYwXWMc+TDDkGiVdXkL0U+IIntn004A5WrAWBbrRoAttWqAWBbrXQA9wG6rofpwdcFWm49rhlg5utdPSbouw7X5Ibdb4YBfw93XoeaRz+29HmpsgCM+fhZALHI5+e+zyS2fwWgwGcC6tcArI7C9txkARjzBROBkOdkpQLYElx9vOC+Bq2B/rYEz5+KX69RjqIcgNvQ22gewwQpuFcD3XUCG5ZVPCerAgCkvQ7AWN+fcKwWmK4YhxeXUzEASiTZYHXsHK3VkbtmCyajQwD8eeFzMVaEckEoQZegCgEwQaGNfGd0BgiUaY7SgoFOAaABX3OI7x8CIFXxrwJ4w2pv59A2FAACNXJyCQCoHcD3ZQD62kQnApCKJYkBCEGiE//w8iu9KXRGAJID70BApwDQgEd7sJ6vACWYS7j0K2Bbz1sXz8nqEIAjXwEhH5Z3BjA5m6QdwmTnSJvjXoGZOiG3jyLqOunvd1w9L1YqiFBdVzA3lDj0Q7ASNQBsq1UDwLZaNQBsq1UDwLZSAXwD80Iz4zIoHFcAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Department'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_9" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[Department]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="1285, 813, 535, 38" ElementType="DropDown" FriendlyName="'Department'" FullSelectorArgument="&lt;webctrl id='department' tag='SELECT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='department' tag='SELECT' type='' aaname='' /&gt;" Guid="b0444542-eb7d-40a3-b92f-b807c5bb5f5c" ImageBase64="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" InformativeScreenshot="f04e2db212f4c1ea4fb2d82615eef317.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="1285, 781, 84, 24" ElementType="Text" FriendlyName="'Department'" FullSelectorArgument="&lt;webctrl aaname='Department' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Department' tag='LABEL' type='' check:text='Department' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFgAAAAcCAYAAADlXHhOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJhSURBVGhD7ZdRSgMxEIbnxQP4oiAoPniKPYdCqaAopSKIoHsFb7DepH33yQOUnqLQO8RJMmsys7NapdMWzQ+LTTKT+edLtiq4IlMVwMYqgI1VABurADZWAWysAthYCfBi4uqqcpXy1NMlBe2S5q55nridceb5vc5pkMQAjwBcM6Pxp7ARD1pJ3qbmr+hpZwAv3eRZZ7QCYBSuXfWtbUl/CzBKa2g5rdlXCc+NN7+Z0RtAT/frhsxlMdyoz6/dZNrQ+qN7eagcAH4+Ahzj2oK8oL8585SttXPKoYTeRE6S3kfyGOfhCOeQX1U1OJO0MuBoMiX7McAwmcH8AeYngFQ43xNjhixGOXnyIfeRxuWBRz/YoGj8WJnL60W42d6zhnumHIDz1GsnZg032G+ajMSi8jbyQ+g248VisGbduTHSrF5LB3zH9urAQ7E8rK999fG9tfrS47oBhxO8F2BQuMcYrmk+GuvsF+q0MZkCbA8k3noJ+GsI4uBIYS6L8crztJwg5TLx+gaAmRkP+OTU7XsQBCU97Y38CvANxZCxNjcYlGZtAcPZXqrPng0DDsbaDfpuMFMP4JBLNzh8vhX7bBawzOlqE4BxjX1X4fhSi1VeLVk0b1oD4Pce+zdjA4DjAY86F4XnmQPuBwUwyMzFOPnb/1AczEU+Dg3mNaNRgINvGsTZdQBux3me9KjW/yXgn/6rHJvqi4vGnt7fws82RoLS9uBN64Bzv37tt4C9Yr308FqrAEaFt9fn87+KEuC1KxrrO5z/ogLYWAWwsQwBF3kVwMYqgI1VABurADZWAWwq5z4A27+4weMAxg8AAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Start Date'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,216" sap2010:WorkflowViewState.IdRef="NTypeInto_12" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[StartDate]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 745, 535, 38" ElementType="InputBox" FriendlyName="'INPUT startDate'" FullSelectorArgument="&lt;webctrl id='startDate' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='startDate' tag='INPUT' type='text' aaname='' /&gt;" Guid="2df4502c-838e-497b-b9da-1d442c9e450a" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhsAAAAqCAYAAAAanpmcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dgxjsMgAETRvf9tbQpKVhRjOZKLJMp070uvAvoRf0uSJKmYsSFJkqq9jI055xpjrPM8AQA+tnfE3hP3rrGxD47jeHwIAPCuvSfug+MaG340AIBf2bsiXWPj6SIAwLeSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXJ2AAAKpKxAQBUJGMDAKhIxgYAUJGMDQCgIhkbAEBFMjYAgIpkbAAAFcnYAAAqkrEBAFQkYwMAqEjGBgBQkYwNAKAiGRsAQEUyNgCAimRsAAAVydgAACqSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXpGhtjjMeLAACf2rsiXWNjzrmO43h8AADwrr0n9q5I19jY7QM/HADAt/aOuA+N3cvYkCRJ+nXGhiRJKrbWP6cSUi+EL6h/AAAAAElFTkSuQmCC" InformativeScreenshot="d27de3f59a182176a64b2b2b3ef4f9f3.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
-                            <uix:Target DesignTimeRectangle="740, 713, 72, 24" ElementType="Text" FriendlyName="'Start Date'" FullSelectorArgument="&lt;webctrl aaname='Start Date' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Start Date' tag='LABEL' type='' check:text='Start Date' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEwAAAAcCAYAAADLGVncAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJuSURBVGhD7ZXBSgMxEIZz8QE8SQXFQw+Cb7DvIShCBS2U4q37Fp6E9uB7bMHnKHvzDQq9eo6TSdKdTGbrptvFS35YtLtJ5p8vmYnSWUnKwBKVgSUqA0tUBpaoDCxRGViiImD1qtBFET7LjftIVK9KXW3djz7aVrpc1e6HpJ2uFrEnfBYVfD1Ox/onwJwxbgISelBKl2vydrPUSk1PAMzF7AJMGGM3d6kPzRbVw38DDMA8tyyyW5ehMQw4+3dg3eYL6uG/AdZxEQNPqQsAqOAvOXmmtFjJBKUM65vTW/mSX3zqd/irLuF/WKf9pPwBBX1PQt8mFvFRFE35tfoHhe1ILllSkrVewkC+iCgO15UtBWSNPTVjcA6ACRLve8JAEHtKY2OcxyDZqHS5f5A8JszJiDV9Cy3cHWHncbGmfLFkhd43jxLhJX8CYM6zj4OJ87EY+4VtHvECXicCHFyL5cWAEcGiAThqQkzeyvY7c1LP9c11CCyGf3pgVL7ETAnejeatwKxn+WDw9+3AiExgpV4P7hDtX2j+50vP2AkbBJhQkt7Hvg99f4R+BWBqfEbm0ecIYMYUT54GlI6uNGcQYMG6LWOZXwlY7E3WHpiYtBfuIm/gPqA1yS8K3LXBgfFvcnnaCnlrBRb9dkKQrT3Ml5VgDGHS9xiguWXwO4UBa5lbczQmN+4AwKK4fixNEr1e6VvWT/+8JSGHe7rhTqwkXcCghqWGSsZhInye6R3uxvWJisBA+N7Pce8CyZ7wESuC3/QQ0x2Gpgq4fysLrXnivLv2sKy9MrBEZWCJysASlYElKgNLVAaWqAwsURlYkrT+BYFc1q7Y8gy7AAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                  </uix:NTypeInto>
-                  <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" DisplayName="Type Into 'Manager'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="NTypeInto_10" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Text="[Manager]" Version="V1">
-                    <uix:NTypeInto.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="1285, 903, 535, 38" ElementType="InputBox" FriendlyName="'INPUT manager'" FullSelectorArgument="&lt;webctrl id='manager' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl id='manager' tag='INPUT' type='text' aaname='' /&gt;" Guid="f636de7d-8d3c-4e9c-8bc3-6205188af678" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAhsAAAAqCAYAAAAanpmcAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dgxjsMgAETRvf9tbQpKVhRjOZKLJMp070uvAvoRf0uSJKmYsSFJkqq9jI055xpjrPM8AQA+tnfE3hP3rrGxD47jeHwIAPCuvSfug+MaG340AIBf2bsiXWPj6SIAwLeSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXJ2AAAKpKxAQBUJGMDAKhIxgYAUJGMDQCgIhkbAEBFMjYAgIpkbAAAFcnYAAAqkrEBAFQkYwMAqEjGBgBQkYwNAKAiGRsAQEUyNgCAimRsAAAVydgAACqSsQEAVCRjAwCoSMYGAFCRjA0AoCIZGwBARTI2AICKZGwAABXpGhtjjMeLAACf2rsiXWNjzrmO43h8AADwrr0n9q5I19jY7QM/HADAt/aOuA+N3cvYkCRJ+nXGhiRJKrbWP6cSUi+EL6h/AAAAAElFTkSuQmCC" InformativeScreenshot="61125f73bb33ccf1fa4b0f675fbeb89a.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image">
-                        <uix:TargetAnchorable.Anchors>
-                          <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
-                            <uix:Target DesignTimeRectangle="1285, 871, 63, 24" ElementType="Text" FriendlyName="'Manager'" FullSelectorArgument="&lt;webctrl aaname='Manager' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Manager' tag='LABEL' type='' check:text='Manager' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAEMAAAAcCAYAAAA6EgJRAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKDSURBVFhH7ZbNahRBEMf7npMegoJInqMfQHwAD0IOioQY3UMwA3mKXMJEBcGXcFZN9OIrLAueBMFbYA8KHrxVqrq6Z6prejLNJpeJ/YdJpqd76uNX1b1joKhVgSFUYAgVGEIFhlCBIVRgCHUwFjVYa8GeLP2DhM4bqHBNNV/5BzdLEQxz6xAOX5iBZFfQHFgwd4bmp68YhnkF797OwB40mLoSzR+/gffmv4Exg68/TmHPPIHm3D/3Wp5YqBdLeN2DwR3jtli4oq22hBqf0bv0P72GNGYH5bdpmK/nPK4Xft5J+VGFXc0rtNt0voQPBWMXPv/9Bx+f6oTJQY1/2VE35xOQQWPAOxEwfseYRx1g58uIJDLs4PixfAfH2zjeui/teBDCDhXRuthZBIN8x/mxFIwdmP/B+08PY6I4xw4UDFepSnWRTkwDJKk1GXZcUiJJUkgswHBVF4mzYv/pNawejA+/w/0zHxwHxQ5TiXm5hKgK1AWmB6OrHinRCUFJOwN+ce3zFsawTQnSwUidiageDAbAzo++460LLpDUQfkAfPDsUAeVA2PMzjAM2koSxiYBDHbk5X2tAYNpmuOfAF8e9BJrg4o6KGgNGKN2hmHkdIbUWjDoJWP24SV+d3SJxEElDWOAu217k8Zh5NjJOTPcml6i7OvSmL0GYbhgNm5ji8nDJtUZEhY7NmZTOMztjBE7GI/+NaHxvbsz0VHsS0JzyatfkywYNjrRVcBOCgaKneE6f9Gcq5A6Zy6FgRq3g0IA3XdGBWe/vsF+75vIA2kvWcxcGFOUK2Cc7FU0ERi+k6KKpjr3appQZ+j2v14QpGlvk2tWgSFUYAgVGEIFhlCB0QrgAmdfECJ0SBtQAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
-                          </scg:List>
-                        </uix:TargetAnchorable.Anchors>
-                      </uix:TargetAnchorable>
-                    </uix:NTypeInto.Target>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                  </uix:NTypeInto>
-                  <uix:NClick ClickType="Single" DisplayName="Click 'Submit'" sap:VirtualizedContainerService.HintSize="334,156" sap2010:WorkflowViewState.IdRef="NClick_2" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="3f3ac69a-05e2-44a6-924b-8e78fb54f296" Version="V1">
-                    <uix:NClick.Target>
-                      <uix:TargetAnchorable BrowserURL="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" DesignTimeRectangle="740, 994, 140, 40" ElementType="Button" FriendlyName="'Submit'" FullSelectorArgument="&lt;webctrl tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='BUTTON' type='button' aaname='Submit' check:text='Submit' /&gt;" Guid="fd73a2a4-ba89-43f2-aef5-8c5bfbae15b0" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAJAAAAAsCAYAAACKTjG2AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAM2SURBVHhe7ZxPbtNAGMW9Z1cpOxYUWAAVLX8F6pozFQmp6gXYQK5Q5QA5Qit2vUC76RUiRUjshu955tlje6wkE0oy0nvST3HGM8bN9+vMuEipnKJsEQmkbJWOQN/PztyXw0N3OpkIMQBuwJE4jUA4cVxV7vPBQXKwEHADjsQSNQLBLskjVgFH4ArTCJTqLMQYjAQSWTASSGTBSCCRBSOBRBaMBBJZMBJIZMFIIJEFI4FEFkzhAlWDtuOq+34tqvY6WeNXMXZ9a39rVHxfEEzBAqEol+4+3L/Pwt2cT9zjTSRAcc+v3DIa/08lGrt+aP/z+5ebFigRU6hAKXmYDSXYgUCYdU5nt3WLW1y5HxLo//LJPvDp9SLc+a2b1+0X7oZNd5fuCEWKlriTSAqMx+sbe/2A416B2Q+kxp3YK4/5Pj4ft9VEx5gd636RQFNrP6oetf0LgClfoFCAV/2i1EVrZ6n7mZehP/Yn+sUCzXjsg3GH/XEmaCuwxd4/ic8j1vYU1+5f3wTt9AtZXl/Y/ZUjEVPmEoaiUJYQFJrnMbNUvWVuTCAsH22B08HYl/G4RJaLMSkk0F7y0Qozvws3H8d+85/ZuWyBbLz/N6IlMfRrC8+lLuqTarNrpQSq27SE7R5IlJw9KMbGAvkCN09JzSzn91n9ce8T1+q0jQikTfTOCZtfO443q/GM5Je0TQXyotTFTLTHYmCT3t8Xpdok0N4BedplAnuHF/X0X1mxvjbteQKtOQMFMVKySKAC6O5/+BhvNAUfCgTR/Pi2bSiQxYru+3X3Ms+t34MIFO4fm3T+fCXAlLmEdYqSSBDjnZHcaDMpgRKBjK+t38MIFMK+qZ93D2HK3UTXH3Y0mzBWCP8Uhn5Y1r5FT0oWk2bOAttx7t+BthEIS+TgKVIC7YLhBz4sQrvhBvgbUf30Fo6bDXM4X88O4Rhg38RjyOHb2j5rtUXn4v8m4X2AkuQBTOECiV3BSCCRBSOBRBaMBBJZMBJIZMFIIJEFI4FEFowEElkwEkhkwUggkQUjgUQWTCOQvuJOrMPoV9zpSzbFKuDG6JdsIjgBu1KDhYAbsTxIRyBF2TQSSNkizv0Fj8kSebuHoIcAAAAASUVORK5CYII=" InformativeScreenshot="732ea8ec9dd385ac072fbbfd3db86b2c.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration' /&gt;" SearchSteps="FuzzySelector, Image" />
-                    </uix:NClick.Target>
-                  </uix:NClick>
-                </Sequence>
-              </ActivityAction>
-            </uix:NApplicationCard.Body>
-            <uix:NApplicationCard.TargetApp>
-              <uix:TargetApp Area="-8, -8, 2576, 1048" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="5f3fcb3fc3bf7568262e1266325fe16b.png" Selector="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration'/&gt;" Url="https://developer.automationanywhere.com/challenges/automationanywherelabs-employeedatamigration.html" />
+              <uix:TargetApp Area="-8, -8, 2576, 1048" BrowserType="Chrome" IconBase64="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" InformativeScreenshot="05ded4e8e4dd6e219bc6f89804ab2328.png" Selector="&lt;html app='chrome.exe' title='Automation Anywhere Labs - Employee Data Migration'/&gt;" Url="[ChallengeUrl]" />
             </uix:NApplicationCard.TargetApp>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -565,16 +495,11 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
           </uix:NApplicationCard>
-          <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:Int32">[counter]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:Int32">[counter + 1]</InArgument>
-            </Assign.Value>
-          </Assign>
         </Sequence>
       </ui:InterruptibleWhile.Body>
+      <ui:InterruptibleWhile.Condition>
+        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="counter &lt;= 10" />
+      </ui:InterruptibleWhile.Condition>
     </ui:InterruptibleWhile>
   </Sequence>
 </Activity>
