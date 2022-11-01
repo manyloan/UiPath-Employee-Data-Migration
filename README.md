@@ -4,6 +4,6 @@ Project to solve the challenge from https://developer.automationanywhere.com/cha
 
 New version uses -> UiPath, API HTTP Request, Insert JavaScript, JSON
 
-New Version - https://www.youtube.com/watch?v=QqasyZnQeKc
+New Version - https://www.youtube.com/watch?v=QqasyZnQeKc 55.953sec
 <br>
-Old Version - https://youtu.be/GUfMBoZHS9A
+Old Version - https://youtu.be/GUfMBoZHS9A 127.442sec
